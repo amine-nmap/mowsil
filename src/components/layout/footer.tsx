@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 
 export default function Footer() {
   const t = useTranslations("home");
+  const legal = useTranslations("legal");
   const pathname = usePathname();
   const locale = pathname.split("/")[1];
 
@@ -37,18 +38,18 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2 text-sm text-white/70">
               <li>
-                <Link href={`/${locale}`} className="hover:text-white transition-colors">
-                  {t("footerLegalNotice")}
+                <Link href={`/${locale}/mentions-legales`} className="hover:text-white transition-colors">
+                  {legal("footerMentions")}
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}`} className="hover:text-white transition-colors">
-                  {t("footerTerms")}
+                <Link href={`/${locale}/cgu`} className="hover:text-white transition-colors">
+                  {legal("footerCgu")}
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}`} className="hover:text-white transition-colors">
-                  {t("footerPrivacy")}
+                <Link href={`/${locale}/confidentialite`} className="hover:text-white transition-colors">
+                  {legal("footerConf")}
                 </Link>
               </li>
             </ul>

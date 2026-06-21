@@ -332,5 +332,100 @@
     "expiredDesc": "Délai de confirmation dépassé",
     "activatedDesc": "Location en cours",
     "completedDesc": "Véhicule restitué"
+  },
+  "legal": {
+    "footerMentions": "Mentions légales",
+    "footerCgu": "Conditions Générales d'Utilisation",
+    "footerConf": "Politique de confidentialité",
+    "mentions": {
+      "title": "Mentions légales",
+      "updated": "Dernière mise à jour : 22 juin 2026",
+      "sections": [
+        {
+          "title": "Éditeur",
+          "body": "MOWSIL est une plateforme numérique exploitée par la société MOWSIL SARL, immatriculée au Registre du Commerce d'Oujda sous le numéro XXXXX, dont le siège social est situé à Oujda, Maroc."
+        },
+        {
+          "title": "Directeur de la publication",
+          "body": "Le directeur de la publication est Monsieur Amine Jabli, gérant de MOWSIL SARL."
+        },
+        {
+          "title": "Hébergement",
+          "body": "Le site MOWSIL est hébergé par Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis."
+        },
+        {
+          "title": "Contact",
+          "body": "Pour toute question relative aux mentions légales, vous pouvez nous contacter par email à l'adresse support@mowsil.ma ou par WhatsApp au +212 XXX XXX XXX."
+        },
+        {
+          "title": "Propriété intellectuelle",
+          "body": "L'ensemble des contenus (textes, logos, marques, design) est la propriété exclusive de MOWSIL SARL. Toute reproduction ou utilisation sans autorisation est interdite."
+        }
+      ]
+    },
+    "cgu": {
+      "title": "Conditions Générales d'Utilisation",
+      "updated": "Dernière mise à jour : 22 juin 2026",
+      "sections": [
+        {
+          "title": "Article 1 — Objet",
+          "body": "Les présentes Conditions Générales d'Utilisation (ci-après « CGU ») régissent l'accès et l'utilisation de la plateforme MOWSIL (le « Service »), accessible depuis le site mowsil.ma et ses applications mobiles. En utilisant le Service, vous acceptez sans réserve les présentes CGU."
+        },
+        {
+          "title": "Article 2 — Définitions",
+          "body": "« Plateforme » : le site internet et l'application mobile MOWSIL. « Utilisateur » : toute personne physique utilisant la Plateforme pour rechercher ou réserver un véhicule. « Agence » : tout professionnel de la location de véhicules inscrit sur la Plateforme. « Véhicule » : tout véhicule proposé à la location par une Agence via la Plateforme. « Réservation » : demande de location d'un Véhicule effectuée par un Utilisateur auprès d'une Agence via la Plateforme."
+        },
+        {
+          "title": "Article 3 — Rôle de MOWSIL",
+          "body": "MOWSIL agit en qualité d'intermédiaire technique entre les Utilisateurs et les Agences. MOWSIL n'est pas loueur de véhicules et n'intervient pas dans le contrat de location conclu directement entre l'Utilisateur et l'Agence. MOWSIL met à disposition une plateforme de mise en relation, de réservation et de suivi, sans être partie au contrat de location. En conséquence, MOWSIL ne saurait être tenu responsable des véhicules proposés, de leur état, de leur disponibilité, ni de l'exécution du contrat de location par l'Agence."
+        },
+        {
+          "title": "Article 4 — Responsabilités",
+          "body": "La responsabilité juridique liée à la location du véhicule incombe exclusivement à l'Agence et à l'Utilisateur. L'Agence est seule responsable de la conformité des véhicules proposés, de leur entretien, de leur assurance, et de la validation des documents requis. L'Utilisateur est seul responsable de l'usage qu'il fait du véhicule loué, du respect du Code de la route, et des dommages éventuels causés au véhicule. MOWSIL ne peut être tenu pour responsable des litiges survenant entre une Agence et un Utilisateur."
+        },
+        {
+          "title": "Article 5 — Données personnelles",
+          "body": "Dans le cadre de l'utilisation de la Plateforme, MOWSIL collecte les données suivantes : nom, prénom, numéro de téléphone, adresse email, et numéro de permis de conduire. Ces données sont collectées exclusivement pour la gestion des réservations et la communication entre l'Utilisateur et l'Agence. La base légale du traitement est l'exécution du contrat de réservation et le consentement de l'Utilisateur. Les données sont conservées pour une durée maximale d'un (1) an à compter de la dernière réservation, après quoi elles sont automatiquement purgées. Conformément à la loi marocaine 09-08 relative à la protection des données personnelles, l'Utilisateur dispose d'un droit d'accès, de rectification et de suppression de ses données. Pour exercer ce droit, l'Utilisateur peut envoyer un email à support@mowsil.ma avec pour objet « Droit à l'oubli ». La demande sera traitée sous 30 jours."
+        },
+        {
+          "title": "Article 6 — Durée et validité",
+          "body": "Les présentes CGU entrent en vigueur à compter de leur acceptation par l'Utilisateur et restent valables pour toute la durée d'utilisation du Service. MOWSIL se réserve le droit de modifier les CGU à tout moment. Les Utilisateurs seront informés de toute modification substantielle par email ou via la Plateforme."
+        }
+      ]
+    },
+    "conf": {
+      "title": "Politique de confidentialité",
+      "updated": "Dernière mise à jour : 22 juin 2026",
+      "sections": [
+        {
+          "title": "1. Données collectées",
+          "body": "Nous collectons les données suivantes lors de l'utilisation de la Plateforme : nom, prénom, adresse email, numéro de téléphone, numéro de permis de conduire, et les informations relatives à vos réservations (dates, véhicule choisi, agence). Ces données sont fournies directement par vous lors de la création de votre compte et de vos réservations."
+        },
+        {
+          "title": "2. Finalités du traitement",
+          "body": "Vos données sont traitées pour les finalités suivantes : (a) gestion et suivi de vos réservations ; (b) communication avec l'Agence concernant votre réservation ; (c) envoi de notifications relatives au statut de votre réservation ; (d) amélioration de la Plateforme ; (e) respect de nos obligations légales."
+        },
+        {
+          "title": "3. Base légale",
+          "body": "Le traitement de vos données repose sur : (a) l'exécution du contrat de réservation (obligation contractuelle) ; (b) votre consentement explicite lors de la création de votre compte et de la validation de vos réservations ; (c) l'intérêt légitime de MOWSIL à améliorer ses services."
+        },
+        {
+          "title": "4. Destinataires des données",
+          "body": "Vos données sont transmises exclusivement à l'Agence auprès de laquelle vous effectuez une réservation, et ce uniquement dans le cadre de la gestion de votre location. Nous ne partageons pas vos données avec des tiers à des fins commerciales. Nos sous-traitants techniques (hébergeur, service d'emails) peuvent avoir accès à vos données dans le strict cadre de leurs prestations."
+        },
+        {
+          "title": "5. Durée de conservation",
+          "body": "Vos données personnelles sont conservées pour une durée maximale d'un (1) an à compter de votre dernière réservation. Passé ce délai, elles sont automatiquement supprimées de nos bases de données actives. Les données nécessaires au respect de nos obligations légales (comptables, fiscales) peuvent être conservées pour la durée légale requise."
+        },
+        {
+          "title": "6. Droit à l'oubli",
+          "body": "Conformément à la loi 09-08, vous disposez d'un droit de suppression de vos données personnelles (« droit à l'oubli »). Pour exercer ce droit, envoyez un email à support@mowsil.ma avec l'objet « Droit à l'oubli » en précisant votre nom et adresse email. Nous traiterons votre demande sous 30 jours maximum. Passé ce délai, toutes vos données personnelles seront définitivement supprimées."
+        },
+        {
+          "title": "7. Contact",
+          "body": "Pour toute question relative à la présente politique de confidentialité ou pour exercer vos droits, vous pouvez nous contacter à support@mowsil.ma. Vous pouvez également nous écrire à l'adresse suivante : MOWSIL SARL, Oujda, Maroc."
+        }
+      ]
+    }
   }
 }
