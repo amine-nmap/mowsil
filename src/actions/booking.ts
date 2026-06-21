@@ -3,6 +3,7 @@
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { isVehicleAvailable, findConflictingBookings } from "./availability";
 import { generateOujCode } from "@/lib/ouj-code";
+import { sendBookingConfirmation, sendBookingCode } from "@/lib/email";
 
 type CreateBookingInput = {
   vehicleId: string;
@@ -28,6 +29,12 @@ function validateBookingInput(input: CreateBookingInput): string | null {
   if (new Date(input.endDate) <= new Date(input.startDate))
     return "La date de fin doit être après la date de début";
   return null;
+}
+
+function formatDate(iso: string): string {
+  return new Date(iso).toLocaleDateString("fr-FR", {
+    day: "numeric", month: "long", year: "numeric",
+  });
 }
 
 export async function createBooking(input: CreateBookingInput) {
@@ -80,6 +87,25 @@ export async function createBooking(input: CreateBookingInput) {
 
   if (!data) return { error: "Erreur lors de la création de la réservation" };
 
+  const firstName = input.clientName.split(" ")[0];
+
+  const { data: vehicle } = await supabase
+    .from("vehicles")
+    .select("brand, model, agencies(name)")
+    .eq("id", input.vehicleId)
+    .maybeSingle();
+
+  if (vehicle) {
+    await sendBookingConfirmation({
+      to: input.clientEmail,
+      firstName,
+      vehicleName: `${vehicle.brand} ${vehicle.model}`,
+      agencyName: (vehicle.agencies as unknown as { name: string }[])?.at(0)?.name ?? "Agence partenaire",
+      startDate: formatDate(input.startDate),
+      endDate: formatDate(input.endDate),
+    });
+  }
+
   return { success: true, bookingId: data.id };
 }
 
@@ -126,6 +152,26 @@ export async function acceptBooking(bookingId: string) {
     .eq("id", bookingId);
 
   if (updateError) return { error: "Erreur lors de l'acceptation" };
+
+  const { data: vehicle } = await supabase
+    .from("vehicles")
+    .select("brand, model, agencies(name, address)")
+    .eq("id", booking.vehicle_id)
+    .maybeSingle();
+
+  if (vehicle) {
+    const agency = (vehicle.agencies as unknown as { name: string; address: string }[])?.at(0) ?? null;
+    await sendBookingCode({
+      to: booking.client_email,
+      firstName: booking.client_name.split(" ")[0],
+      code,
+      vehicleName: `${vehicle.brand} ${vehicle.model}`,
+      agencyName: agency?.name ?? "Agence partenaire",
+      agencyAddress: agency?.address ?? "Oujda, Maroc",
+      startDate: formatDate(booking.start_date),
+      endDate: formatDate(booking.end_date),
+    });
+  }
 
   return { success: true, code };
 }
