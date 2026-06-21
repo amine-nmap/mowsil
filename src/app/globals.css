@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-mowsil-navy: #0A2540;
+  --color-mowsil-green: #00C896;
+  --color-mowsil-gray: #F5F7FA;
+  --color-mowsil-white: #FFFFFF;
+  --color-mowsil-body: #4A5568;
+  --color-mowsil-legend: #718096;
+  --color-mowsil-error: #E53E3E;
+  --color-mowsil-success-bg: rgba(0, 200, 150, 0.1);
+  --color-mowsil-card-border: rgba(10, 37, 64, 0.08);
+  --font-sans: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background: var(--color-mowsil-white);
+  color: var(--color-mowsil-body);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html[dir="rtl"] body {
+  font-family: var(--font-arabic), "Noto Sans Arabic", var(--font-inter), sans-serif;
+}
+
+::selection {
+  background: rgba(0, 200, 150, 0.2);
+  color: #0A2540;
+}
+
+/* Leaflet overrides for MOWSIL theme */
+.leaflet-container {
+  font-family: var(--font-sans);
+  border-radius: 0.5rem;
+}
+
+.leaflet-control-zoom a {
+  color: #0A2540 !important;
+}
+

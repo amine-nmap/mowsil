@@ -1,0 +1,34 @@
+-- ============================================
+-- MOWSIL — Seed Data (Démonstration)
+-- ============================================
+-- À exécuter APRÈS avoir créé un utilisateur auth manuellement
+-- Remplacer les UUID ci-dessous par ceux de vos utilisateurs de test
+-- ============================================
+
+-- 1. Insérer un profil agency
+-- ATTENTION : remplacer 'USER_UUID' par l'ID auth.users réel
+-- INSERT INTO profiles (id, role, full_name, phone)
+-- VALUES ('USER_UUID', 'agency', 'Agence Test', '+212600000001');
+
+-- 2. Insérer l'agence
+-- INSERT INTO agencies (owner_id, name, city, phone, email, address, status)
+-- VALUES (
+--   'USER_UUID',
+--   'Agence Al Atlas',
+--   'Oujda',
+--   '+212600000001',
+--   'contact@alatlas.ma',
+--   '123 Bd Mohammed V, Oujda',
+--   'active'
+-- );
+
+-- 3. Insérer des véhicules
+-- Remplacer 'AGENCY_UUID' par l'ID de l'agence créée
+-- INSERT INTO vehicles (agency_id, brand, model, year, fuel_type, gearbox, daily_price, deposit_amount, mileage_policy, fuel_policy, photos)
+-- VALUES
+--   ('AGENCY_UUID', 'Dacia', 'Sandero', 2022, 'Essence', 'Manuelle', 200, 3000, '200 km/jour inclus', 'Plein à plein', ARRAY[]::text[]),
+--   ('AGENCY_UUID', 'Renault', 'Clio', 2023, 'Diesel', 'Manuelle', 220, 3000, 'Illimité', 'Plein à plein', ARRAY[]::text[]),
+--   ('AGENCY_UUID', 'Dacia', 'Logan', 2021, 'Diesel', 'Manuelle', 280, 4000, 'Illimité', 'Plein à plein', ARRAY[]::text[]),
+--   ('AGENCY_UUID', 'Hyundai', 'Tucson', 2023, 'Diesel', 'Automatique', 450, 7000, 'Illimité', 'Plein à plein', ARRAY[]::text[]),
+--   ('AGENCY_UUID', 'Dacia', 'Duster', 2022, 'Diesel', 'Manuelle', 400, 5000, 'Illimité', 'Plein à plein', ARRAY[]::text[]),
+--   ('AGENCY_UUID', 'Peugeot', '301', 2023, 'Essence', 'Manuelle', 300, 4000, 'Illimité', 'Plein à plein', ARRAY[]::text[]);
