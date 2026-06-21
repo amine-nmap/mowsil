@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { useActionState } from "react";
 import {
   Car, Clock, Play, CheckCircle,
   Plus, KeyRound, DollarSign, ArrowRight, ArrowLeft,
@@ -13,6 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Message } from "@/components/ui/message";
 import ExpiryTimer from "@/components/agence/expiry-timer";
+import { activateBookingByCode } from "@/actions/agency-bookings";
 
 type DashboardData = {
   agency: { id: string; name: string };
@@ -172,16 +174,23 @@ export default function AgencyDashboardClient({ data }: Props) {
           <div className="space-y-6">
             <Card>
               <CardHeader className="p-5 pb-0">
-                <h2 className="font-bold text-mowsil-navy">{d("fleetTitle")}</h2>
+                <div className="flex items-center justify-between">
+                  <h2 className="font-bold text-mowsil-navy">{d("fleetTitle")}</h2>
+                  <Link href={`/${locale}/agence/vehicles`} className="text-xs font-semibold text-mowsil-green hover:underline">
+                    {c("seeMore")}
+                  </Link>
+                </div>
               </CardHeader>
               <CardBody className="p-5">
                 {data.vehicles.length === 0 ? (
                   <>
                     <p className="text-sm text-mowsil-legend mb-4">{d("noVehicles")}</p>
-                    <Button variant="secondary" size="sm" className="w-full gap-2" disabled>
-                      <Plus size={16} />
-                      {d("addVehicle")}
-                    </Button>
+                    <Link href={`/${locale}/agence/vehicles/add`}>
+                      <Button variant="secondary" size="sm" className="w-full gap-2">
+                        <Plus size={16} />
+                        {d("addVehicle")}
+                      </Button>
+                    </Link>
                   </>
                 ) : (
                   <div className="space-y-2">
@@ -201,18 +210,7 @@ export default function AgencyDashboardClient({ data }: Props) {
               </CardBody>
             </Card>
 
-            <Card>
-              <CardHeader className="p-5 pb-0">
-                <h2 className="font-bold text-mowsil-navy">{d("activateCode")}</h2>
-              </CardHeader>
-              <CardBody className="p-5 space-y-3">
-                <Input placeholder={d("codePlaceholder")} />
-                <Button variant="primary" size="sm" className="w-full gap-2" disabled>
-                  <KeyRound size={16} />
-                  {d("codeActivate")}
-                </Button>
-              </CardBody>
-            </Card>
+            <ActivateCodeCard d={d} />
 
             <Message variant="info" className="text-xs">
               <p>{d("codeInfo")}</p>
@@ -221,5 +219,47 @@ export default function AgencyDashboardClient({ data }: Props) {
         </div>
       </div>
     </div>
+  );
+}
+
+function ActivateCodeCard({ d }: { d: (key: string) => string }) {
+  const [state, formAction, pending] = useActionState(activateBookingByCode, { error: "", success: false });
+
+  return (
+    <Card>
+      <CardHeader className="p-5 pb-0">
+        <h2 className="font-bold text-mowsil-navy">{d("activateCode")}</h2>
+      </CardHeader>
+      <CardBody className="p-5 space-y-3">
+        <form action={formAction} className="space-y-3">
+          <Input
+            name="code"
+            placeholder={d("codePlaceholder")}
+            maxLength={12}
+            style={{ textTransform: "uppercase" }}
+            required
+          />
+          <Button
+            variant="primary"
+            size="sm"
+            className="w-full gap-2"
+            disabled={pending}
+          >
+            <KeyRound size={16} />
+            {pending ? "..." : d("codeActivate")}
+          </Button>
+          {state.error && (
+            <Message variant="error" className="text-xs">
+              <p>{state.error}</p>
+            </Message>
+          )}
+          {state.success && (
+            <Message variant="success" className="text-xs">
+              <p>Réservation activée avec succès</p>
+            </Message>
+          )}
+        </form>
+      </CardBody>
+    </Card>
   );
 }

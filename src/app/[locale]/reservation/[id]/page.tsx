@@ -14,7 +14,7 @@ export default async function ReservationSuccessPage({ params }: Props) {
     const supabase = await createServerSupabaseClient();
     const { data } = await supabase
       .from("bookings")
-      .select("*, vehicles(brand, model)")
+      .select("*, vehicles(brand, model), agencies(name, city)")
       .eq("id", id)
       .maybeSingle();
     booking = data;

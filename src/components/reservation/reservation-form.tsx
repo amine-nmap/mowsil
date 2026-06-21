@@ -58,6 +58,8 @@ export default function ReservationForm({
     const license = formData.get("license") as string;
     const startDate = formData.get("startDate") as string;
     const endDate = formData.get("endDate") as string;
+    const birthDate = formData.get("birthDate") as string;
+    const licenseIssueDate = formData.get("licenseIssueDate") as string;
 
     const fullName = `${firstName} ${lastName}`.trim();
 
@@ -67,6 +69,8 @@ export default function ReservationForm({
       clientPhone: phone,
       clientEmail: email,
       clientLicenseNumber: license,
+      birthDate: new Date(birthDate).toISOString(),
+      licenseIssueDate: new Date(licenseIssueDate).toISOString(),
       startDate: new Date(startDate).toISOString(),
       endDate: new Date(endDate).toISOString(),
     });
@@ -159,6 +163,22 @@ export default function ReservationForm({
                   />
                   <div className="grid grid-cols-2 gap-3">
                     <Input
+                      id="birthDate"
+                      name="birthDate"
+                      label={t("formBirthDate")}
+                      type="date"
+                      required
+                    />
+                    <Input
+                      id="licenseIssueDate"
+                      name="licenseIssueDate"
+                      label={t("formLicenseIssueDate")}
+                      type="date"
+                      required
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <Input
                       id="startDate"
                       name="startDate"
                       label={t("formStartDate")}
@@ -175,10 +195,6 @@ export default function ReservationForm({
                       required
                     />
                   </div>
-
-                  <Message variant="info" className="text-xs">
-                    <p>Âge minimum : 21 ans. Permis B valide depuis plus d&apos;un an.</p>
-                  </Message>
 
                   <Button
                     variant="primary"

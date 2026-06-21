@@ -1,12 +1,16 @@
 "use client";
 
+import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { ArrowRight, ArrowLeft } from "lucide-react";
+import { ArrowRight, ArrowLeft, CheckCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardBody, CardHeader } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Message } from "@/components/ui/message";
 import ExpiryTimer from "@/components/agence/expiry-timer";
+import { completeBooking } from "@/actions/agency-bookings";
 
 type Booking = {
   id: string;
@@ -88,39 +92,73 @@ export default function AgencyRequestsClient({ bookings }: Props) {
           </Card>
         ) : (
           <div className="space-y-2">
-            {sorted.map((booking) => (
-              <Link
-                key={booking.id}
-                href={`/${locale}/agence/requests/${booking.id}`}
-              >
-                <Card hover className="p-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <div>
-                        <p className="text-sm font-semibold text-mowsil-navy">
-                          {booking.vehicles?.brand} {booking.vehicles?.model}
-                        </p>
-                        <p className="text-xs text-mowsil-legend">
-                          {booking.client_name} · {new Date(booking.start_date).toLocaleDateString()} - {new Date(booking.end_date).toLocaleDateString()}
-                        </p>
+            {sorted.map((booking) =>
+              booking.status === "activee" ? (
+                <ActiveBookingCard key={booking.id} booking={booking} locale={locale} isRtl={isRtl} />
+              ) : (
+                <Link key={booking.id} href={`/${locale}/agence/requests/${booking.id}`}>
+                  <Card hover className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div>
+                          <p className="text-sm font-semibold text-mowsil-navy">
+                            {booking.vehicles?.brand} {booking.vehicles?.model}
+                          </p>
+                          <p className="text-xs text-mowsil-legend">
+                            {booking.client_name} · {new Date(booking.start_date).toLocaleDateString()} - {new Date(booking.end_date).toLocaleDateString()}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        {booking.expires_at && booking.status === "en_attente" && (
+                          <ExpiryTimer expiresAt={booking.expires_at} />
+                        )}
+                        <Badge variant={statusBadge[booking.status] ?? "outline"}>
+                          {statusLabel[booking.status] ?? booking.status}
+                        </Badge>
+                        {isRtl ? <ArrowLeft size={16} className="text-mowsil-legend" /> : <ArrowRight size={16} className="text-mowsil-legend" />}
                       </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      {booking.expires_at && booking.status === "en_attente" && (
-                        <ExpiryTimer expiresAt={booking.expires_at} />
-                      )}
-                      <Badge variant={statusBadge[booking.status] ?? "outline"}>
-                        {statusLabel[booking.status] ?? booking.status}
-                      </Badge>
-                      {isRtl ? <ArrowLeft size={16} className="text-mowsil-legend" /> : <ArrowRight size={16} className="text-mowsil-legend" />}
-                    </div>
-                  </div>
-                </Card>
-              </Link>
-            ))}
+                  </Card>
+                </Link>
+              ),
+            )}
           </div>
         )}
       </div>
     </div>
+  );
+}
+
+function ActiveBookingCard({ booking, locale, isRtl }: { booking: Booking; locale: string; isRtl: boolean }) {
+  const [state, formAction, pending] = useActionState(completeBooking, { error: "", success: false });
+
+  return (
+    <Card className="p-4 border-mowsil-green/30">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <div>
+            <p className="text-sm font-semibold text-mowsil-navy">
+              {booking.vehicles?.brand} {booking.vehicles?.model}
+            </p>
+            <p className="text-xs text-mowsil-legend">
+              {booking.client_name} · {new Date(booking.start_date).toLocaleDateString()} - {new Date(booking.end_date).toLocaleDateString()}
+            </p>
+          </div>
+        </div>
+        <div className="flex items-center gap-3">
+          <Badge variant="default">Activée</Badge>
+          <form action={formAction}>
+            <input type="hidden" name="bookingId" value={booking.id} />
+            <Button variant="primary" size="sm" className="gap-1 text-xs" disabled={pending}>
+              <CheckCircle size={14} />
+              {pending ? "..." : "Clôturer"}
+            </Button>
+          </form>
+          {state?.error && <p className="text-xs text-mowsil-error">{state.error}</p>}
+          {state?.success && <p className="text-xs text-mowsil-green">Terminée ✓</p>}
+        </div>
+      </div>
+    </Card>
   );
 }

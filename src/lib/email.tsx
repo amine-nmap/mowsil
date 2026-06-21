@@ -2,6 +2,7 @@ import { Resend } from "resend";
 import { render } from "@react-email/components";
 import BookingConfirmationEmail from "@/emails/booking-confirmation";
 import BookingCodeEmail from "@/emails/booking-code";
+import NewBookingAgencyEmail from "@/emails/new-booking-agency";
 
 const resend = new Resend(process.env.RESEND_API_KEY!);
 
@@ -72,5 +73,40 @@ export async function sendBookingCode(input: SendCodeInput) {
   });
 
   if (error) console.error("Resend error (code):", error);
+  return { error: error?.message ?? null };
+}
+
+type SendNewBookingNotificationInput = {
+  to: string;
+  agencyName: string;
+  clientName: string;
+  vehicleName: string;
+  startDate: string;
+  endDate: string;
+  dashboardUrl: string;
+};
+
+export async function sendNewBookingNotification(input: SendNewBookingNotificationInput) {
+  const { to, ...props } = input;
+
+  const html = await render(
+    <NewBookingAgencyEmail
+      agencyName={props.agencyName}
+      clientName={props.clientName}
+      vehicleName={props.vehicleName}
+      startDate={props.startDate}
+      endDate={props.endDate}
+      dashboardUrl={props.dashboardUrl}
+    />,
+  );
+
+  const { error } = await resend.emails.send({
+    from: "MOWSIL <reservations@mowsil.ma>",
+    to,
+    subject: `Nouvelle demande de réservation — ${props.vehicleName}`,
+    html,
+  });
+
+  if (error) console.error("Resend error (agency notification):", error);
   return { error: error?.message ?? null };
 }

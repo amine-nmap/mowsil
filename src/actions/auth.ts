@@ -87,3 +87,46 @@ export async function requireAgency() {
   if (!session) redirect("/fr/agence/login");
   return session;
 }
+
+export async function createAccountFromBooking(
+  bookingId: string,
+  email: string,
+  password: string,
+): Promise<{ error: string; success: boolean }> {
+  if (!email || !password || password.length < 8) {
+    return { error: "Mot de passe requis (min 8 caractères)", success: false };
+  }
+
+  const supabase = await createServerSupabaseClient();
+
+  const { data: booking } = await supabase
+    .from("bookings")
+    .select("client_email")
+    .eq("id", bookingId)
+    .maybeSingle();
+
+  if (!booking) return { error: "Réservation introuvable", success: false };
+  if (booking.client_email !== email) return { error: "Email incorrect", success: false };
+
+  const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+    email,
+    password,
+  });
+
+  if (signUpError) {
+    if (signUpError.message.includes("already")) {
+      return { error: "Un compte existe déjà avec cet email", success: false };
+    }
+    return { error: "Erreur lors de la création du compte", success: false };
+  }
+
+  if (signUpData?.user) {
+    await supabase.from("profiles").upsert({
+      id: signUpData.user.id,
+      email,
+      role: "client",
+    });
+  }
+
+  return { error: "", success: true };
+}

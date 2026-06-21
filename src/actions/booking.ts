@@ -3,7 +3,7 @@
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { isVehicleAvailable, findConflictingBookings } from "./availability";
 import { generateOujCode } from "@/lib/ouj-code";
-import { sendBookingConfirmation, sendBookingCode } from "@/lib/email";
+import { sendBookingConfirmation, sendBookingCode, sendNewBookingNotification } from "@/lib/email";
 
 type CreateBookingInput = {
   vehicleId: string;
@@ -11,6 +11,8 @@ type CreateBookingInput = {
   clientPhone: string;
   clientEmail: string;
   clientLicenseNumber: string;
+  birthDate: string;
+  licenseIssueDate: string;
   startDate: string;
   endDate: string;
 };
@@ -28,6 +30,17 @@ function validateBookingInput(input: CreateBookingInput): string | null {
     return "Dates de location requises";
   if (new Date(input.endDate) <= new Date(input.startDate))
     return "La date de fin doit être après la date de début";
+
+  if (!input.birthDate) return "Date de naissance requise";
+  const birth = new Date(input.birthDate);
+  const age = Math.floor((Date.now() - birth.getTime()) / (365.25 * 24 * 60 * 60 * 1000));
+  if (age < 21) return "Vous devez avoir au moins 21 ans pour réserver.";
+
+  if (!input.licenseIssueDate) return "Date d'obtention du permis requise";
+  const licenseDate = new Date(input.licenseIssueDate);
+  const yearsSinceLicense = (Date.now() - licenseDate.getTime()) / (365.25 * 24 * 60 * 60 * 1000);
+  if (yearsSinceLicense < 1) return "Votre permis doit être obtenu depuis au moins 1 an.";
+
   return null;
 }
 
@@ -91,19 +104,36 @@ export async function createBooking(input: CreateBookingInput) {
 
   const { data: vehicle } = await supabase
     .from("vehicles")
-    .select("brand, model, agencies(name)")
+    .select("brand, model, agencies(name, email, owner_id)")
     .eq("id", input.vehicleId)
     .maybeSingle();
 
   if (vehicle) {
+    const agencyData = (vehicle.agencies as unknown as { name: string; email: string; owner_id: string }[] | null)?.at(0);
+    const agencyName = agencyData?.name ?? "Agence partenaire";
+    const agencyEmail = agencyData?.email;
+
     await sendBookingConfirmation({
       to: input.clientEmail,
       firstName,
       vehicleName: `${vehicle.brand} ${vehicle.model}`,
-      agencyName: (vehicle.agencies as unknown as { name: string }[])?.at(0)?.name ?? "Agence partenaire",
+      agencyName,
       startDate: formatDate(input.startDate),
       endDate: formatDate(input.endDate),
     });
+
+    if (agencyEmail) {
+      const locale = input.clientEmail.includes("ar") ? "ar" : "fr";
+      await sendNewBookingNotification({
+        to: agencyEmail,
+        agencyName,
+        clientName: input.clientName,
+        vehicleName: `${vehicle.brand} ${vehicle.model}`,
+        startDate: formatDate(input.startDate),
+        endDate: formatDate(input.endDate),
+        dashboardUrl: `https://mowsil.vercel.app/${locale}/agence/requests`,
+      });
+    }
   }
 
   return { success: true, bookingId: data.id };
