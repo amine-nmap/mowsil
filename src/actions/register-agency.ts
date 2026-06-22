@@ -1,6 +1,7 @@
 "use server";
 
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { createAdminSupabaseClient } from "@/lib/supabase/admin";
 
 type RegisterInput = {
   companyName: string;
@@ -16,12 +17,13 @@ type RegisterInput = {
 
 export async function registerAgency(input: RegisterInput) {
   const supabase = await createServerSupabaseClient();
+  const admin = createAdminSupabaseClient();
 
   const { data: authData, error: authError } = await supabase.auth.signUp({
     email: input.email,
     password: input.password,
     options: {
-      data: { role: "agency", full_name: input.companyName },
+      data: { role: "agency", full_name: input.companyName, phone: input.phone },
     },
   });
 
@@ -30,18 +32,6 @@ export async function registerAgency(input: RegisterInput) {
       return { error: "Un compte avec cet email existe déjà" };
     }
     return { error: "Erreur lors de la création du compte" };
-  }
-
-  const { error: profileError } = await supabase.from("profiles").insert({
-    id: authData.user.id,
-    role: "agency",
-    full_name: input.companyName,
-    phone: input.phone,
-  });
-
-  if (profileError) {
-    await supabase.auth.admin.deleteUser(authData.user.id);
-    return { error: "Erreur lors de la création du profil" };
   }
 
   const { error: agencyError } = await supabase.from("agencies").insert({
@@ -58,13 +48,13 @@ export async function registerAgency(input: RegisterInput) {
   });
 
   if (agencyError) {
-    await supabase.auth.admin.deleteUser(authData.user.id);
+    console.error("Agency insert error:", agencyError);
+    await admin.auth.admin.deleteUser(authData.user.id);
     return { error: "Erreur lors de la création de l'agence" };
   }
 
   return { success: true };
 }
-
 export async function uploadFacadePhoto(formData: FormData) {
   const file = formData.get("file") as File;
   if (!file) return { url: null };
