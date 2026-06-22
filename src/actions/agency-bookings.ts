@@ -1,7 +1,7 @@
 "use server";
 
 import { createServerSupabaseClient } from "@/lib/supabase/server";
-import { requireAgency } from "./auth";
+import { requireAgency } from "@/lib/auth-helpers";
 import { sendReceipt } from "@/lib/email";
 
 const OUJ_CODE_REGEX = /^OUJ-[A-Z0-9]{4}-[A-Z0-9]{2}$/;

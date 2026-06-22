@@ -79,7 +79,7 @@ export default function AgencyRequestsClient({ bookings }: Props) {
             <h1 className="text-2xl font-bold text-mowsil-navy">{d("requestsTitle")}</h1>
             <p className="text-sm text-mowsil-legend mt-1">
               {pendingCount > 0
-                ? `${pendingCount} demande${pendingCount > 1 ? "s" : ""} en attente`
+                ? d("pendingRequestsSubtitle", { count: pendingCount })
                 : d("noPendingRequests")}
             </p>
           </div>

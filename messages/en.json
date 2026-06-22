@@ -4,6 +4,8 @@
     "tagline": "Find it. Book it. Drive it.",
     "loading": "Loading...",
     "error": "An error occurred",
+    "errorDescription": "An error occurred while loading. Please try again.",
+    "retry": "Retry",
     "success": "Operation successful",
     "submit": "Submit",
     "cancel": "Cancel",
@@ -183,7 +185,12 @@
     "toDefine": "To be defined",
     "duration": "Duration",
     "day": "day",
-    "days": "days"
+    "days": "days",
+    "vehicle": "Vehicle",
+    "price": "Price",
+    "status": "Status",
+    "actions": "Actions",
+    "pricePerDayCompact": "{price} DH/day"
   },
   "reservation": {
     "title": "Book this vehicle",
@@ -236,7 +243,9 @@
     "startLabel": "Start",
     "endLabel": "End",
     "acceptBooking": "Accept booking",
-    "rejectBooking": "Reject booking"
+    "rejectBooking": "Reject booking",
+    "clientInfo": "Client",
+    "periodLabel": "Period"
   },
   "agencies": {
     "registerTitle": "Partner agency registration",
@@ -293,6 +302,7 @@
     "noVehicles": "No vehicles added",
     "addVehicle": "Add a vehicle",
     "pendingRequests": "Pending requests",
+    "pendingRequestsSubtitle": "{count, plural, one {# pending request} other {# pending requests}}",
     "activateCode": "Activate a code",
     "codePlaceholder": "OUJ-XXXX-XX",
     "codeActivate": "Activate",

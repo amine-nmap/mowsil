@@ -6,7 +6,9 @@ import { adminLogin } from "@/actions/admin-auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Message } from "@/components/ui/message";
+import { adminLocale } from "@/lib/admin-locale";
 
+const L = adminLocale;
 const initialState = { error: "" };
 
 export default function AdminLoginPage() {
@@ -19,12 +21,8 @@ export default function AdminLoginPage() {
           <div className="w-12 h-12 rounded-full bg-mowsil-navy flex items-center justify-center mx-auto mb-4">
             <Shield size={24} className="text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-mowsil-navy">
-            Administration
-          </h1>
-          <p className="text-sm text-mowsil-legend mt-1">
-            Accès réservé aux administrateurs MOWSIL
-          </p>
+          <h1 className="text-2xl font-bold text-mowsil-navy">{L.adminTitle}</h1>
+          <p className="text-sm text-mowsil-legend mt-1">{L.adminAccessRestricted}</p>
         </div>
 
         <form
@@ -40,15 +38,15 @@ export default function AdminLoginPage() {
           <Input
             id="email"
             name="email"
-            label="Email"
+            label={L.email}
             type="email"
-            placeholder="admin@mowsil.ma"
+            placeholder={L.emailPlaceholder}
             required
           />
           <Input
             id="password"
             name="password"
-            label="Mot de passe"
+            label={L.password}
             type="password"
             required
           />
@@ -59,7 +57,7 @@ export default function AdminLoginPage() {
             className="w-full gap-2"
             disabled={pending}
           >
-            {pending ? "Connexion..." : "Se connecter"}
+            {pending ? L.connecting : L.login}
           </Button>
         </form>
       </div>

@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Message } from "@/components/ui/message";
 import ExpiryTimer from "@/components/agence/expiry-timer";
 import { activateBookingByCode } from "@/actions/agency-bookings";
+import { logout } from "@/actions/auth";
 
 type DashboardData = {
   agency: { id: string; name: string };
@@ -46,6 +47,7 @@ export default function AgencyDashboardClient({ data }: Props) {
   const d = useTranslations("dashboard");
   const s = useTranslations("statuses");
   const c = useTranslations("common");
+  const v = useTranslations("vehicles");
   const params = useParams<{ locale?: string }>();
   const locale = params?.locale ?? "fr";
   const isRtl = locale === "ar";
@@ -58,7 +60,7 @@ export default function AgencyDashboardClient({ data }: Props) {
             <h1 className="text-2xl font-bold text-mowsil-navy">{d("title")}</h1>
             <p className="text-sm text-mowsil-legend mt-1">{d("subtitle")}</p>
           </div>
-          <form action={`/${locale}/agence/login`} method="post">
+          <form action={logout}>
             <Button variant="ghost" size="sm" type="submit">
               {c("logout")}
             </Button>
@@ -194,14 +196,14 @@ export default function AgencyDashboardClient({ data }: Props) {
                   </>
                 ) : (
                   <div className="space-y-2">
-                    {data.vehicles.map((v) => (
-                      <div key={v.id} className="flex items-center justify-between py-1.5">
+                    {data.vehicles.map((vehicle) => (
+                      <div key={vehicle.id} className="flex items-center justify-between py-1.5">
                         <p className="text-sm font-semibold text-mowsil-navy">
-                          {v.brand} {v.model}
+                          {vehicle.brand} {vehicle.model}
                         </p>
                         <div className="flex items-center gap-2">
-                          <span className="text-xs text-mowsil-legend">{v.daily_price} DH/j</span>
-                          <span className={`w-2 h-2 rounded-full ${v.is_available ? 'bg-mowsil-green' : 'bg-amber-400'}`} />
+                          <span className="text-xs text-mowsil-legend">{vehicle.daily_price} {v("perDay")}</span>
+                          <span className={`w-2 h-2 rounded-full ${vehicle.is_available ? 'bg-mowsil-green' : 'bg-amber-400'}`} />
                         </div>
                       </div>
                     ))}

@@ -42,13 +42,13 @@ type Props = {
   booking: Booking;
 };
 
-const statusLabel: Record<string, string> = {
-  en_attente: "En attente",
-  confirmee: "Confirmée",
-  refusee: "Refusée",
-  expiree: "Expirée",
-  activee: "Activée",
-  terminee: "Terminée",
+const statusKey: Record<string, string> = {
+  en_attente: "pending",
+  confirmee: "confirmed",
+  refusee: "rejected",
+  expiree: "expired",
+  activee: "activated",
+  terminee: "completed",
 };
 
 export default function RequestDetailClient({ booking }: Props) {
@@ -85,7 +85,7 @@ export default function RequestDetailClient({ booking }: Props) {
           <div>
             <h1 className="text-2xl font-bold text-mowsil-navy">{t("requestDetail")}</h1>
             <p className="text-sm text-mowsil-legend mt-1">
-              Réservation #{booking.id.slice(0, 8)}
+              {t("requestDetail")} #{booking.id.slice(0, 8)}
             </p>
           </div>
           <Badge
@@ -96,7 +96,7 @@ export default function RequestDetailClient({ booking }: Props) {
               : "outline"
             }
           >
-            {statusLabel[booking.status] ?? booking.status}
+            {s(statusKey[booking.status] ?? booking.status)}
           </Badge>
         </div>
 
@@ -127,7 +127,7 @@ export default function RequestDetailClient({ booking }: Props) {
           <Card>
             <CardBody className="p-5 space-y-4">
               <h2 className="font-bold text-mowsil-navy flex items-center gap-2">
-                <User size={16} /> Client
+                <User size={16} /> {t("clientInfo")}
               </h2>
               <div className="space-y-3">
                 <div className="flex items-center gap-3 text-sm">
@@ -153,7 +153,7 @@ export default function RequestDetailClient({ booking }: Props) {
           <Card>
             <CardBody className="p-5 space-y-4">
               <h2 className="font-bold text-mowsil-navy flex items-center gap-2">
-                <Calendar size={16} /> Période
+                <Calendar size={16} /> {t("periodLabel")}
               </h2>
               <div className="space-y-3">
                 <div className="flex items-center gap-3 text-sm">
@@ -182,7 +182,7 @@ export default function RequestDetailClient({ booking }: Props) {
         <Card className="mb-8">
           <CardBody className="p-5 space-y-4">
             <h2 className="font-bold text-mowsil-navy flex items-center gap-2">
-              <Car size={16} /> Véhicule
+              <Car size={16} /> {v("vehicle")}
             </h2>
             <div className="flex items-center justify-between">
               <div>

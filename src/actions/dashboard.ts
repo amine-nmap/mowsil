@@ -1,7 +1,7 @@
 "use server";
 
 import { createServerSupabaseClient } from "@/lib/supabase/server";
-import { requireAgency } from "./auth";
+import { requireAgency } from "@/lib/auth-helpers";
 
 export async function getDashboardData() {
   const session = await requireAgency();

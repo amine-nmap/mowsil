@@ -4,6 +4,8 @@
     "tagline": "Find it. Book it. Drive it.",
     "loading": "جار التحميل...",
     "error": "حدث خطأ",
+    "errorDescription": "حدث خطأ أثناء التحميل. يرجى المحاولة مرة أخرى.",
+    "retry": "إعادة المحاولة",
     "success": "تمت العملية بنجاح",
     "submit": "إرسال",
     "cancel": "إلغاء",
@@ -183,7 +185,12 @@
     "toDefine": "سيتم تحديده",
     "duration": "المدة",
     "day": "يوم",
-    "days": "أيام"
+    "days": "أيام",
+    "vehicle": "المركبة",
+    "price": "السعر",
+    "status": "الحالة",
+    "actions": "الإجراءات",
+    "pricePerDayCompact": "{price} درهم/اليوم"
   },
   "reservation": {
     "title": "احجز هذه المركبة",
@@ -236,7 +243,9 @@
     "startLabel": "البداية",
     "endLabel": "النهاية",
     "acceptBooking": "قبول الحجز",
-    "rejectBooking": "رفض الحجز"
+    "rejectBooking": "رفض الحجز",
+    "clientInfo": "العميل",
+    "periodLabel": "الفترة"
   },
   "agencies": {
     "registerTitle": "تسجيل الوكالة الشريكة",
@@ -293,6 +302,7 @@
     "noVehicles": "لم يتم إضافة أي مركبة",
     "addVehicle": "إضافة مركبة",
     "pendingRequests": "الطلبات المعلقة",
+    "pendingRequestsSubtitle": "{count, plural, one {# طلب معلق} other {# طلبات معلقة}}",
     "activateCode": "تفعيل رمز",
     "codePlaceholder": "OUJ-XXXX-XX",
     "codeActivate": "تفعيل",

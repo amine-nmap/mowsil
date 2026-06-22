@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardBody } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-type BookingVehicle = { brand: string; model: string } | null;
+type BookingVehicle = { brand: string; model: string; agencies: { name: string } | null } | null;
 type BookingAgency = { name: string } | null;
 
 type Booking = {
@@ -21,7 +21,6 @@ type Booking = {
   unique_code: string | null;
   created_at: string;
   vehicles: BookingVehicle;
-  agencies: BookingAgency;
 };
 
 const STATUS_MAP: Record<string, { key: string; variant: "warning" | "success" | "error" | "outline" | "default" }> = {
@@ -114,7 +113,7 @@ export default function ClientDashboard({ bookings, email }: Props) {
             const vehicleName = booking.vehicles
               ? `${booking.vehicles.brand} ${booking.vehicles.model}`
               : "Véhicule";
-            const agencyName = booking.agencies?.name ?? "";
+            const agencyName = booking.vehicles?.agencies?.name ?? "";
 
             return (
               <Card key={booking.id}>

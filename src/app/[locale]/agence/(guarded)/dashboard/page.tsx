@@ -1,5 +1,5 @@
 import { getDashboardData } from "@/actions/dashboard";
-import { requireAgency } from "@/actions/auth";
+import { requireAgency } from "@/lib/auth-helpers";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import AgencyDashboardClient from "@/components/agence/dashboard-client";

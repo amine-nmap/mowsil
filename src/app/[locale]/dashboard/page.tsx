@@ -26,7 +26,7 @@ export default async function DashboardPage() {
 
   const { data: bookings } = await supabase
     .from("bookings")
-    .select("*, vehicles(brand, model), agencies(name)")
+    .select("*, vehicles(brand, model, agencies(name))")
     .eq("client_email", user.email)
     .order("created_at", { ascending: false });
 
