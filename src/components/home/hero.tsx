@@ -34,7 +34,7 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 mt-4 w-full max-w-md">
-            <Button variant="primary" size="lg" className="w-full sm:w-auto gap-2 text-base px-8">
+            <Button variant="primary" size="lg" className="w-full sm:w-auto gap-2 text-base px-8" href={`/${params.locale ?? "fr"}/results`}>
               <Search size={18} />
               {t("heroCta")}
             </Button>

@@ -1,15 +1,21 @@
-"use client";
-
-import { forwardRef, type ButtonHTMLAttributes } from "react";
+import type { ReactNode } from "react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
 type ButtonSize = "sm" | "md" | "lg";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+type ButtonProps = {
   variant?: ButtonVariant;
   size?: ButtonSize;
-}
+  href?: string;
+  disabled?: boolean;
+  className?: string;
+  children?: ReactNode;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
+  type?: "button" | "submit" | "reset";
+  formAction?: string;
+};
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
@@ -28,26 +34,25 @@ const sizeStyles: Record<ButtonSize, string> = {
   lg: "px-6 py-3 text-base",
 };
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "primary", size = "md", disabled, children, ...props }, ref) => {
+const baseClasses =
+  "inline-flex items-center justify-center gap-2 rounded-lg font-sans font-bold transition-all duration-200 ease-out cursor-pointer disabled:opacity-40 disabled:pointer-events-none no-underline";
+
+export function Button({ className, variant = "primary", size = "md", disabled, href, children, ...props }: ButtonProps) {
+  const classes = cn(baseClasses, variantStyles[variant], sizeStyles[size], className);
+
+  if (href) {
     return (
-      <button
-        ref={ref}
-        disabled={disabled}
-        className={cn(
-          "inline-flex items-center justify-center gap-2 rounded-lg font-sans font-bold transition-all duration-200 ease-out cursor-pointer disabled:opacity-40 disabled:pointer-events-none",
-          variantStyles[variant],
-          sizeStyles[size],
-          className,
-        )}
-        {...props}
-      >
+      <Link href={href} className={classes}>
         {children}
-      </button>
+      </Link>
     );
-  },
-);
+  }
 
-Button.displayName = "Button";
+  return (
+    <button disabled={disabled} className={classes} {...props}>
+      {children}
+    </button>
+  );
+}
 
-export { Button, type ButtonProps, type ButtonVariant, type ButtonSize };
+export type { ButtonProps, ButtonVariant, ButtonSize };

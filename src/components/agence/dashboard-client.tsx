@@ -58,7 +58,7 @@ export default function AgencyDashboardClient({ data }: Props) {
             <h1 className="text-2xl font-bold text-mowsil-navy">{d("title")}</h1>
             <p className="text-sm text-mowsil-legend mt-1">{d("subtitle")}</p>
           </div>
-          <form action="/fr/agence/login" method="post">
+          <form action={`/${locale}/agence/login`} method="post">
             <Button variant="ghost" size="sm" type="submit">
               {c("logout")}
             </Button>

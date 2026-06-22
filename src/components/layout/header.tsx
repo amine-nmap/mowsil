@@ -13,8 +13,8 @@ export default function Header() {
   const c = useTranslations("common");
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const locale = pathname.split("/")[1];
-  const otherLocale = locale === "fr" ? "ar" : "fr";
+  const locale = pathname.split("/")[1] || "fr";
+  const otherLocale = locale === "fr" ? "ar" : locale === "ar" ? "en" : "fr";
 
   const links = [
     { href: `/${locale}`, label: t("home") },
@@ -59,7 +59,7 @@ export default function Header() {
             >
               {locale === "fr" ? c("arabic") : c("french")}
             </Link>
-            <Button variant="primary" size="sm" className="hidden sm:inline-flex">
+            <Button variant="primary" size="sm" className="hidden sm:inline-flex" href={`/${locale}/agence/login`}>
               {t("login")}
             </Button>
             <button
