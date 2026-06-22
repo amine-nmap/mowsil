@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 
 export default function Footer() {
   const t = useTranslations("home");
+  const n = useTranslations("navigation");
   const legal = useTranslations("legal");
   const pathname = usePathname();
   const locale = pathname.split("/")[1];
@@ -24,12 +25,24 @@ export default function Footer() {
           </div>
           <div>
             <h4 className="text-sm font-bold uppercase tracking-wider text-mowsil-green mb-3">
-              {t("footerContact")}
+              {n("home")}
             </h4>
             <ul className="space-y-2 text-sm text-white/70">
-              <li>{t("footerAddress")}</li>
-              <li>{t("footerEmail")}</li>
-              <li>{t("footerWhatsApp")}</li>
+              <li>
+                <Link href={`/${locale}`} className="hover:text-white transition-colors">
+                  {n("home")}
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${locale}/results`} className="hover:text-white transition-colors">
+                  {n("results")}
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${locale}/dashboard`} className="hover:text-white transition-colors">
+                  {n("dashboard")}
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
@@ -51,6 +64,14 @@ export default function Footer() {
                 <Link href={`/${locale}/confidentialite`} className="hover:text-white transition-colors">
                   {legal("footerConf")}
                 </Link>
+              </li>
+              <li>
+                <a
+                  href={`mailto:support@mowsil.ma?subject=Droit%20%C3%A0%20l%27oubli`}
+                  className="hover:text-white transition-colors"
+                >
+                  {legal("footerRightToDeletion")}
+                </a>
               </li>
             </ul>
           </div>

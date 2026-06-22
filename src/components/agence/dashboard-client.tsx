@@ -107,7 +107,7 @@ export default function AgencyDashboardClient({ data }: Props) {
               <DollarSign size={20} className="text-mowsil-green" />
               <div>
                 <p className="text-2xl font-bold text-mowsil-green">{data.stats.totalEarnings} DH</p>
-                <p className="text-xs text-mowsil-legend">Gains totaux</p>
+                <p className="text-xs text-mowsil-legend">{d("totalEarnings")}</p>
               </div>
             </CardBody>
           </Card>
@@ -127,7 +127,7 @@ export default function AgencyDashboardClient({ data }: Props) {
               <CardBody className="p-5">
                 {data.pendingBookings.length === 0 ? (
                   <p className="text-sm text-mowsil-legend text-center py-6">
-                    Aucune demande en attente
+                    {d("noPendingRequests")}
                   </p>
                 ) : (
                   <div className="space-y-3">
@@ -163,7 +163,7 @@ export default function AgencyDashboardClient({ data }: Props) {
                       href={`/${locale}/agence/requests`}
                       className="text-sm font-semibold text-mowsil-green hover:underline"
                     >
-                      Voir toutes les demandes
+                      {d("viewAllRequests")}
                     </Link>
                   </div>
                 )}
@@ -255,7 +255,7 @@ function ActivateCodeCard({ d }: { d: (key: string) => string }) {
           )}
           {state.success && (
             <Message variant="success" className="text-xs">
-              <p>Réservation activée avec succès</p>
+              <p>{d("activatedSuccess")}</p>
             </Message>
           )}
         </form>

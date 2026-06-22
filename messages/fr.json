@@ -240,9 +240,14 @@
     "errorPasswordMatch": "Les mots de passe ne correspondent pas"
   },
   "dashboard": {
-    "title": "Tableau de bord",
-    "subtitle": "Gérez votre flotte et vos réservations.",
-    "statsTitle": "Aperçu",
+    "title": "Mes réservations",
+    "subtitle": "Suivez l'historique de vos locations.",
+    "emptyState": "Aucune réservation pour le moment",
+    "emptyStateDesc": "Parcourez les véhicules disponibles à Oujda et effectuez votre première réservation.",
+    "bookNow": "Réserver un véhicule",
+    "loginPrompt": "Connectez-vous pour voir l'historique de vos réservations.",
+    "loginButton": "Se connecter",
+    "codeLabel": "Code de retrait",
     "statsVehicles": "Véhicules",
     "statsPending": "Demandes en attente",
     "statsActive": "Locations actives",
@@ -255,7 +260,11 @@
     "activateCode": "Activer un code",
     "codePlaceholder": "OUJ-XXXX-XX",
     "codeActivate": "Activer",
-    "codeInfo": "Code unique à saisir lors du retrait du véhicule par le client."
+    "codeInfo": "Code unique à saisir lors du retrait du véhicule par le client.",
+    "totalEarnings": "Gains totaux",
+    "noPendingRequests": "Aucune demande en attente",
+    "viewAllRequests": "Voir toutes les demandes",
+    "activatedSuccess": "Réservation activée avec succès"
   },
   "admin": {
     "title": "Administration",
@@ -371,6 +380,7 @@
     "footerMentions": "Mentions légales",
     "footerCgu": "Conditions Générales d'Utilisation",
     "footerConf": "Politique de confidentialité",
+    "footerRightToDeletion": "Droit à l'oubli",
     "mentions": {
       "title": "Mentions légales",
       "updated": "Dernière mise à jour : 22 juin 2026",
@@ -400,6 +410,7 @@
     "cgu": {
       "title": "Conditions Générales d'Utilisation",
       "updated": "Dernière mise à jour : 22 juin 2026",
+      "intro": "Les présentes conditions générales régissent l'utilisation de la plateforme MOWSIL. En utilisant nos services, vous acceptez les présentes conditions.",
       "sections": [
         {
           "title": "Article 1 — Objet",
