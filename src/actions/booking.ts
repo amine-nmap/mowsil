@@ -15,6 +15,7 @@ type CreateBookingInput = {
   licenseIssueDate: string;
   startDate: string;
   endDate: string;
+  locale?: string;
 };
 
 function validateBookingInput(input: CreateBookingInput): string | null {
@@ -132,7 +133,6 @@ export async function createBooking(input: CreateBookingInput) {
     });
 
     if (agencyEmail) {
-      const locale = input.clientEmail.includes("ar") ? "ar" : "fr";
       await sendNewBookingNotification({
         to: agencyEmail,
         agencyName,
@@ -140,7 +140,7 @@ export async function createBooking(input: CreateBookingInput) {
         vehicleName: `${vehicle.brand} ${vehicle.model}`,
         startDate: formatDate(input.startDate),
         endDate: formatDate(input.endDate),
-        dashboardUrl: `https://mowsil.vercel.app/${locale}/agence/requests`,
+        dashboardUrl: `https://mowsil.vercel.app/${input.locale ?? "fr"}/agence/requests`,
       });
     }
   }

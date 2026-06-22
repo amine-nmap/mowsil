@@ -40,13 +40,13 @@ const statusBadge: Record<string, "warning" | "success" | "error" | "outline" | 
   terminee: "outline",
 };
 
-const statusLabel: Record<string, string> = {
-  en_attente: "En attente",
-  confirmee: "Confirmée",
-  refusee: "Refusée",
-  expiree: "Expirée",
-  activee: "Activée",
-  terminee: "Terminée",
+const statusKey: Record<string, string> = {
+  en_attente: "pending",
+  confirmee: "confirmed",
+  refusee: "rejected",
+  expiree: "expired",
+  activee: "activated",
+  terminee: "completed",
 };
 
 const statusOrder: Record<string, number> = {
@@ -60,6 +60,7 @@ const statusOrder: Record<string, number> = {
 
 export default function AgencyRequestsClient({ bookings }: Props) {
   const d = useTranslations("dashboard");
+  const s = useTranslations("statuses");
   const params = useParams<{ locale?: string }>();
   const locale = params?.locale ?? "fr";
   const isRtl = locale === "ar";
@@ -75,7 +76,7 @@ export default function AgencyRequestsClient({ bookings }: Props) {
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-2xl font-bold text-mowsil-navy">Demandes de réservation</h1>
+            <h1 className="text-2xl font-bold text-mowsil-navy">{d("requestsTitle")}</h1>
             <p className="text-sm text-mowsil-legend mt-1">
               {pendingCount > 0
                 ? `${pendingCount} demande${pendingCount > 1 ? "s" : ""} en attente`
@@ -87,7 +88,7 @@ export default function AgencyRequestsClient({ bookings }: Props) {
         {sorted.length === 0 ? (
           <Card>
             <CardBody className="p-8 text-center">
-              <p className="text-sm text-mowsil-legend">Aucune réservation pour le moment</p>
+              <p className="text-sm text-mowsil-legend">{d("emptyState")}</p>
             </CardBody>
           </Card>
         ) : (
@@ -114,7 +115,7 @@ export default function AgencyRequestsClient({ bookings }: Props) {
                           <ExpiryTimer expiresAt={booking.expires_at} />
                         )}
                         <Badge variant={statusBadge[booking.status] ?? "outline"}>
-                          {statusLabel[booking.status] ?? booking.status}
+                          {s(statusKey[booking.status] ?? booking.status)}
                         </Badge>
                         {isRtl ? <ArrowLeft size={16} className="text-mowsil-legend" /> : <ArrowRight size={16} className="text-mowsil-legend" />}
                       </div>
@@ -131,6 +132,8 @@ export default function AgencyRequestsClient({ bookings }: Props) {
 }
 
 function ActiveBookingCard({ booking, locale, isRtl }: { booking: Booking; locale: string; isRtl: boolean }) {
+  const d = useTranslations("dashboard");
+  const s = useTranslations("statuses");
   const [state, formAction, pending] = useActionState(completeBooking, { error: "", success: false });
 
   return (
@@ -147,16 +150,16 @@ function ActiveBookingCard({ booking, locale, isRtl }: { booking: Booking; local
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <Badge variant="default">Activée</Badge>
+          <Badge variant="default">{s("activated")}</Badge>
           <form action={formAction}>
             <input type="hidden" name="bookingId" value={booking.id} />
             <Button variant="primary" size="sm" className="gap-1 text-xs" disabled={pending}>
               <CheckCircle size={14} />
-              {pending ? "..." : "Clôturer"}
+              {pending ? "..." : d("closeBooking")}
             </Button>
           </form>
           {state?.error && <p className="text-xs text-mowsil-error">{state.error}</p>}
-          {state?.success && <p className="text-xs text-mowsil-green">Terminée ✓</p>}
+          {state?.success && <p className="text-xs text-mowsil-green">{d("completedSuccess")} ✓</p>}
         </div>
       </div>
     </Card>

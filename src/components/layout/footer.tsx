@@ -9,7 +9,7 @@ export default function Footer() {
   const n = useTranslations("navigation");
   const legal = useTranslations("legal");
   const pathname = usePathname();
-  const locale = pathname.split("/")[1];
+  const locale = pathname.split("/")[1] || "fr";
 
   return (
     <footer className="bg-mowsil-navy text-white">

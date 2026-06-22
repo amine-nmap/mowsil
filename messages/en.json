@@ -14,6 +14,7 @@
     "search": "Search",
     "save": "Save",
     "delete": "Delete",
+    "confirmDelete": "Delete this vehicle?",
     "edit": "Edit",
     "seeMore": "See more",
     "seeLess": "See less",
@@ -137,6 +138,7 @@
     "seats": "{count} seats",
     "doors": "{count} doors",
     "addTitle": "Add a vehicle",
+    "editTitle": "Edit vehicle",
     "addSubtitle": "Add a vehicle to your fleet",
     "myFleet": "My fleet",
     "brand": "Brand",
@@ -200,7 +202,14 @@
     "statusExpired": "Expired",
     "statusActivated": "Activated",
     "statusCompleted": "Completed",
-    "minAgeNotice": "Minimum age: 21. Valid B license held for more than 1 year."
+    "minAgeNotice": "Minimum age: 21. Valid B license held for more than 1 year.",
+    "requestDetail": "Request details",
+    "remainingTime": "Time left to respond",
+    "pickupCode": "Pickup code",
+    "startLabel": "Start",
+    "endLabel": "End",
+    "acceptBooking": "Accept booking",
+    "rejectBooking": "Reject booking"
   },
   "agencies": {
     "registerTitle": "Partner agency registration",
@@ -264,7 +273,9 @@
     "totalEarnings": "Total earnings",
     "noPendingRequests": "No pending requests",
     "viewAllRequests": "View all requests",
-    "activatedSuccess": "Booking activated successfully"
+    "activatedSuccess": "Booking activated successfully",
+    "closeBooking": "Close",
+    "completedSuccess": "Completed"
   },
   "admin": {
     "title": "Administration",

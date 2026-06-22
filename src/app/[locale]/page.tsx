@@ -13,13 +13,14 @@ export async function generateMetadata({ params }: Props) {
   return { title: t("metaTitle"), description: t("metaDescription") };
 }
 
-export default function HomePage() {
+export default async function HomePage({ params }: Props) {
+  const { locale } = await params;
   return (
     <>
       <Hero />
       <HowItWorks />
       <WhyMowsil />
-      <CtaSection />
+      <CtaSection locale={locale} />
     </>
   );
 }
@@ -98,7 +99,7 @@ function WhyMowsil() {
   );
 }
 
-function CtaSection() {
+function CtaSection({ locale }: { locale: string }) {
   const t = useTranslations("home");
 
   return (
@@ -110,7 +111,7 @@ function CtaSection() {
         <p className="text-white/60 max-w-md mx-auto mb-8 text-sm sm:text-base">
           {t("ctaDesc")}
         </p>
-        <Button variant="primary" size="lg" className="text-base px-8">
+        <Button variant="primary" size="lg" className="text-base px-8" href={`/${locale}/results`}>
           {t("ctaButton")}
         </Button>
       </div>

@@ -74,6 +74,7 @@ export default function ReservationForm({
       licenseIssueDate: new Date(licenseIssueDate).toISOString(),
       startDate: new Date(startDate).toISOString(),
       endDate: new Date(endDate).toISOString(),
+      locale: params.locale,
     });
 
     if (result.error) return { error: result.error };

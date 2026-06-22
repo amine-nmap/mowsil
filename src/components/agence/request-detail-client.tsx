@@ -53,6 +53,8 @@ const statusLabel: Record<string, string> = {
 
 export default function RequestDetailClient({ booking }: Props) {
   const router = useRouter();
+  const t = useTranslations("reservation");
+  const c = useTranslations("common");
   const v = useTranslations("vehicles");
 
   async function handleAccept() {
@@ -75,12 +77,12 @@ export default function RequestDetailClient({ booking }: Props) {
           onClick={() => router.back()}
           className="inline-flex items-center gap-2 text-sm font-semibold text-mowsil-navy hover:text-mowsil-green transition-colors mb-6"
         >
-          Retour
+          {c("back")}
         </button>
 
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-2xl font-bold text-mowsil-navy">Détail de la demande</h1>
+            <h1 className="text-2xl font-bold text-mowsil-navy">{t("requestDetail")}</h1>
             <p className="text-sm text-mowsil-legend mt-1">
               Réservation #{booking.id.slice(0, 8)}
             </p>
@@ -102,7 +104,7 @@ export default function RequestDetailClient({ booking }: Props) {
             <CardBody className="p-4 flex items-center gap-3">
               <Clock size={20} className="text-amber-500" />
               <div>
-                <p className="text-sm font-semibold text-mowsil-navy">Temps restant pour répondre</p>
+                <p className="text-sm font-semibold text-mowsil-navy">{t("remainingTime")}</p>
                 <ExpiryTimer expiresAt={booking.expires_at} />
               </div>
             </CardBody>
@@ -112,7 +114,7 @@ export default function RequestDetailClient({ booking }: Props) {
         {booking.unique_code && (
           <Card className="mb-6 border-mowsil-green/30">
             <CardBody className="p-5 text-center">
-              <p className="text-xs text-mowsil-legend uppercase tracking-wider mb-1">Code de retrait</p>
+              <p className="text-xs text-mowsil-legend uppercase tracking-wider mb-1">{t("pickupCode")}</p>
               <p className="text-3xl font-bold text-mowsil-green tracking-widest">
                 {booking.unique_code}
               </p>
@@ -156,7 +158,7 @@ export default function RequestDetailClient({ booking }: Props) {
                 <div className="flex items-center gap-3 text-sm">
                   <Calendar size={16} className="text-mowsil-legend shrink-0" />
                   <div>
-                    <p className="text-mowsil-legend text-xs">Début</p>
+                    <p className="text-mowsil-legend text-xs">{t("startLabel")}</p>
                     <p className="text-mowsil-navy font-semibold">
                       {new Date(booking.start_date).toLocaleDateString()}
                     </p>
@@ -165,7 +167,7 @@ export default function RequestDetailClient({ booking }: Props) {
                 <div className="flex items-center gap-3 text-sm">
                   <Calendar size={16} className="text-mowsil-legend shrink-0" />
                   <div>
-                    <p className="text-mowsil-legend text-xs">Fin</p>
+                    <p className="text-mowsil-legend text-xs">{t("endLabel")}</p>
                     <p className="text-mowsil-navy font-semibold">
                       {new Date(booking.end_date).toLocaleDateString()}
                     </p>
@@ -208,7 +210,7 @@ export default function RequestDetailClient({ booking }: Props) {
               onClick={handleAccept}
             >
               <CheckCircle size={18} />
-              Accepter la réservation
+              {t("acceptBooking")}
             </Button>
             <Button
               variant="danger"
@@ -217,7 +219,7 @@ export default function RequestDetailClient({ booking }: Props) {
               onClick={handleReject}
             >
               <XCircle size={18} />
-              Refuser la réservation
+              {t("rejectBooking")}
             </Button>
           </div>
         )}

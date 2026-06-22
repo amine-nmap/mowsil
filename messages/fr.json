@@ -14,6 +14,7 @@
     "search": "Rechercher",
     "save": "Enregistrer",
     "delete": "Supprimer",
+    "confirmDelete": "Supprimer ce véhicule ?",
     "edit": "Modifier",
     "seeMore": "Voir plus",
     "seeLess": "Voir moins",
@@ -137,6 +138,7 @@
     "seats": "{count} places",
     "doors": "{count} portes",
     "addTitle": "Ajouter un véhicule",
+    "editTitle": "Modifier le véhicule",
     "addSubtitle": "Ajoutez un véhicule à votre flotte",
     "myFleet": "Ma flotte",
     "brand": "Marque",
@@ -200,7 +202,14 @@
     "statusExpired": "Expirée",
     "statusActivated": "Activée",
     "statusCompleted": "Terminée",
-    "minAgeNotice": "Âge minimum : 21 ans. Permis B valide depuis plus d'un an."
+    "minAgeNotice": "Âge minimum : 21 ans. Permis B valide depuis plus d'un an.",
+    "requestDetail": "Détail de la demande",
+    "remainingTime": "Temps restant pour répondre",
+    "pickupCode": "Code de retrait",
+    "startLabel": "Début",
+    "endLabel": "Fin",
+    "acceptBooking": "Accepter la réservation",
+    "rejectBooking": "Refuser la réservation"
   },
   "agencies": {
     "registerTitle": "Inscription agence partenaire",
@@ -264,7 +273,9 @@
     "totalEarnings": "Gains totaux",
     "noPendingRequests": "Aucune demande en attente",
     "viewAllRequests": "Voir toutes les demandes",
-    "activatedSuccess": "Réservation activée avec succès"
+    "activatedSuccess": "Réservation activée avec succès",
+    "closeBooking": "Clôturer",
+    "completedSuccess": "Terminée"
   },
   "admin": {
     "title": "Administration",
