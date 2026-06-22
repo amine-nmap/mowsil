@@ -100,6 +100,15 @@ export async function createBooking(input: CreateBookingInput) {
 
   if (!data) return { error: "Erreur lors de la création de la réservation" };
 
+  const { error: vehicleUpdateError } = await supabase
+    .from("vehicles")
+    .update({ is_available: false })
+    .eq("id", input.vehicleId);
+
+  if (vehicleUpdateError) {
+    console.error("Erreur mise à jour disponibilité véhicule:", vehicleUpdateError.message);
+  }
+
   const firstName = input.clientName.split(" ")[0];
 
   const { data: vehicle } = await supabase

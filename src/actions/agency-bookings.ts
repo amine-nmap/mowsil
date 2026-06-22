@@ -2,6 +2,7 @@
 
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { requireAgency } from "./auth";
+import { sendReceipt } from "@/lib/email";
 
 const OUJ_CODE_REGEX = /^OUJ-[A-Z0-9]{4}-[A-Z0-9]{2}$/;
 
@@ -69,6 +70,33 @@ export async function completeBooking(_prev: { error: string; success: boolean }
     .from("vehicles")
     .update({ is_available: true })
     .eq("id", booking.vehicle_id);
+
+  const { data: vehicle } = await supabase
+    .from("vehicles")
+    .select("brand, model, daily_price, agencies(name)")
+    .eq("id", booking.vehicle_id)
+    .maybeSingle();
+
+  if (vehicle) {
+    const agency = (vehicle.agencies as unknown as { name: string }[])?.at(0);
+    const start = new Date(booking.start_date);
+    const end = new Date(booking.end_date);
+    const totalDays = Math.max(1, Math.round((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)));
+    const dailyPrice = vehicle.daily_price ?? 0;
+    const totalAmount = totalDays * dailyPrice;
+
+    await sendReceipt({
+      to: booking.client_email,
+      firstName: booking.client_name.split(" ")[0],
+      vehicleName: `${vehicle.brand} ${vehicle.model}`,
+      agencyName: agency?.name ?? "Agence partenaire",
+      startDate: start.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" }),
+      endDate: end.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" }),
+      totalDays,
+      dailyPrice,
+      totalAmount,
+    });
+  }
 
   return { error: "", success: true };
 }

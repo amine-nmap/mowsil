@@ -3,6 +3,7 @@ import { render } from "@react-email/components";
 import BookingConfirmationEmail from "@/emails/booking-confirmation";
 import BookingCodeEmail from "@/emails/booking-code";
 import NewBookingAgencyEmail from "@/emails/new-booking-agency";
+import ReceiptEmail from "@/emails/receipt";
 
 const resend = new Resend(process.env.RESEND_API_KEY!);
 
@@ -108,5 +109,44 @@ export async function sendNewBookingNotification(input: SendNewBookingNotificati
   });
 
   if (error) console.error("Resend error (agency notification):", error);
+  return { error: error?.message ?? null };
+}
+
+type SendReceiptInput = {
+  to: string;
+  firstName: string;
+  vehicleName: string;
+  agencyName: string;
+  startDate: string;
+  endDate: string;
+  totalDays: number;
+  dailyPrice: number;
+  totalAmount: number;
+};
+
+export async function sendReceipt(input: SendReceiptInput) {
+  const { to, ...props } = input;
+
+  const html = await render(
+    <ReceiptEmail
+      firstName={props.firstName}
+      vehicleName={props.vehicleName}
+      agencyName={props.agencyName}
+      startDate={props.startDate}
+      endDate={props.endDate}
+      totalDays={props.totalDays}
+      dailyPrice={props.dailyPrice}
+      totalAmount={props.totalAmount}
+    />,
+  );
+
+  const { error } = await resend.emails.send({
+    from: "MOWSIL <reservations@mowsil.ma>",
+    to,
+    subject: `Receipt — ${props.vehicleName}`,
+    html,
+  });
+
+  if (error) console.error("Resend error (receipt):", error);
   return { error: error?.message ?? null };
 }

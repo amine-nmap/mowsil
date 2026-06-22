@@ -3,7 +3,7 @@ export const siteConfig = {
   nameAr: "موصل",
   description: "Premier agrégateur de location de voitures de confiance à Oujda",
   url: "https://mowsil.vercel.app",
-  locales: ["fr", "ar"] as const,
+  locales: ["fr", "ar", "en"] as const,
   defaultLocale: "fr" as const,
 };
 

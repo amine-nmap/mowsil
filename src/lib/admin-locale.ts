@@ -37,6 +37,15 @@ export const adminLocale = {
   statsVehicles: "Véhicules",
   statsBookings: "Réservations",
   statsPending: "En attente",
+  reconciliation: "Réconciliation",
+  recCommissionRate: "Commission 5%",
+  recMonth: "Mois",
+  recBookings: "Réservations",
+  recRevenue: "Chiffre d'affaires",
+  recCommission: "Commission MOWSIL",
+  recExportCsv: "Exporter CSV",
+  recNoData: "Aucune donnée pour ce mois",
+  recSubtitle: "Réservations terminées ou activées par mois",
 } as const;
 
 export type AdminLocale = typeof adminLocale;
