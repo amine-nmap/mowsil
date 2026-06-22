@@ -1,11 +1,19 @@
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { requireAgency } from "@/actions/auth";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
 import RequestDetailClient from "@/components/agence/request-detail-client";
 
 type Props = {
   params: Promise<{ id: string; locale: string }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "dashboard" });
+  return { title: `${t("requestsTitle")} | MOWSIL` };
+}
 
 export default async function RequestDetailPage({ params }: Props) {
   const { id } = await params;

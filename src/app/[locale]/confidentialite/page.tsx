@@ -1,7 +1,14 @@
-import { getMessages } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
 import { Card, CardBody } from "@/components/ui/card";
 
 type Props = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "legal" });
+  return { title: `${t("conf.title")} | MOWSIL` };
+}
 
 export default async function ConfidentialitePage({ params }: Props) {
   const { locale } = await params;

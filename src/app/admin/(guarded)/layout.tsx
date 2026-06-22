@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
-import { LayoutDashboard, Building2, Calendar, Receipt, LogOut } from "lucide-react";
+import { LayoutDashboard, Building2, Calendar, Receipt, QrCode, LogOut } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { adminLocale } from "@/lib/admin-locale";
@@ -11,6 +11,7 @@ const navItems = [
   { href: "/admin/agencies", label: t.agencies, icon: Building2 },
   { href: "/admin/bookings", label: t.bookings, icon: Calendar },
   { href: "/admin/reconciliation", label: t.reconciliation, icon: Receipt },
+  { href: "/admin/qr-stickers", label: t.qrStickers, icon: QrCode },
 ];
 
 export default async function AdminGuardedLayout({ children }: { children: ReactNode }) {

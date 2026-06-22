@@ -1,5 +1,15 @@
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
 import ClientDashboard from "./client-dashboard";
+
+type Props = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "dashboard" });
+  return { title: `${t("title")} | MOWSIL` };
+}
 
 export default async function DashboardPage() {
   const supabase = await createServerSupabaseClient();

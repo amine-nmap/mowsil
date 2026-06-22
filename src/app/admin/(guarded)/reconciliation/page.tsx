@@ -112,7 +112,7 @@ export default function AdminReconciliationPage() {
         </div>
 
         {loading ? (
-          <p className="text-mowsil-legend text-sm">{t.dashboard}</p>
+          <p className="text-mowsil-legend text-sm">{t.loading}</p>
         ) : !data ? (
           <div className="bg-white rounded-xl border border-mowsil-card-border p-8 text-center">
             <p className="text-mowsil-legend text-sm">{t.recNoData}</p>
@@ -149,9 +149,9 @@ export default function AdminReconciliationPage() {
                     <th className="text-left px-4 py-3 font-semibold text-mowsil-navy whitespace-nowrap">{t.colVehicle}</th>
                     <th className="text-left px-4 py-3 font-semibold text-mowsil-navy whitespace-nowrap">{t.colAgency}</th>
                     <th className="text-left px-4 py-3 font-semibold text-mowsil-navy whitespace-nowrap">{t.colDates}</th>
-                    <th className="text-left px-4 py-3 font-semibold text-mowsil-navy whitespace-nowrap">Jours</th>
-                    <th className="text-left px-4 py-3 font-semibold text-mowsil-navy whitespace-nowrap">Total DH</th>
-                    <th className="text-left px-4 py-3 font-semibold text-mowsil-navy whitespace-nowrap">Commission DH</th>
+                    <th className="text-left px-4 py-3 font-semibold text-mowsil-navy whitespace-nowrap">{t.recColDays}</th>
+                    <th className="text-left px-4 py-3 font-semibold text-mowsil-navy whitespace-nowrap">{t.recColTotal}</th>
+                    <th className="text-left px-4 py-3 font-semibold text-mowsil-navy whitespace-nowrap">{t.recColCommission}</th>
                     <th className="text-left px-4 py-3 font-semibold text-mowsil-navy whitespace-nowrap">{t.colStatus}</th>
                   </tr>
                 </thead>

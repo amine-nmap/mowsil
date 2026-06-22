@@ -46,6 +46,7 @@ export default function ReservationForm({
 }: Props) {
   const t = useTranslations("reservation");
   const v = useTranslations("vehicles");
+  const c = useTranslations("common");
   const router = useRouter();
   const params = useParams<{ vehicleId: string; locale: string }>();
   const isRtl = params.locale === "ar";
@@ -82,7 +83,7 @@ export default function ReservationForm({
       return { error: "" };
     }
 
-    return { error: "Erreur inattendue" };
+    return { error: c("error") };
   };
 
   const [state, formAction, pending] = useActionState(submitAction, initialState);
@@ -102,7 +103,7 @@ export default function ReservationForm({
           className="inline-flex items-center gap-2 text-sm font-semibold text-mowsil-navy hover:text-mowsil-green transition-colors mb-6"
         >
           {isRtl ? <ArrowRight size={16} /> : <ArrowLeft size={16} />}
-          Retour
+          {c("back")}
         </button>
 
         <div className="text-center mb-8">
@@ -205,7 +206,7 @@ export default function ReservationForm({
                     {pending ? (
                       <>
                         <Clock size={18} className="animate-spin" />
-                        Traitement...
+                        {c("loading")}
                       </>
                     ) : (
                       <>

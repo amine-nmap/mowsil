@@ -37,6 +37,7 @@ export const adminLocale = {
   statsVehicles: "Véhicules",
   statsBookings: "Réservations",
   statsPending: "En attente",
+  loading: "Chargement...",
   reconciliation: "Réconciliation",
   recCommissionRate: "Commission 5%",
   recMonth: "Mois",
@@ -46,6 +47,18 @@ export const adminLocale = {
   recExportCsv: "Exporter CSV",
   recNoData: "Aucune donnée pour ce mois",
   recSubtitle: "Réservations terminées ou activées par mois",
+  recColDays: "Jours",
+  recColTotal: "Total DH",
+  recColCommission: "Commission DH",
+  qrStickers: "QR Stickers",
+  qrTitle: "Générer un QR code sticker",
+  qrSubtitle: "Génère un QR code pour sticker de pare-brise. Scannez pour voir la réservation.",
+  qrBooking: "Réservation",
+  qrCodePreview: "Aperçu du QR code",
+  qrPrint: "Imprimer",
+  qrRegenerate: "Régénérer",
+  qrNoBookings: "Sélectionnez une réservation confirmée ou active",
+  qrSelectBooking: "Sélectionner une réservation",
 } as const;
 
 export type AdminLocale = typeof adminLocale;

@@ -1,10 +1,18 @@
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
 import ReservationSuccess from "@/components/reservation/reservation-success";
 
 type Props = {
   params: Promise<{ id: string; locale: string }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "reservation" });
+  return { title: `${t("successTitle")} | MOWSIL` };
+}
 
 export default async function ReservationSuccessPage({ params }: Props) {
   const { id } = await params;
