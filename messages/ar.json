@@ -31,7 +31,11 @@
     "no": "لا",
     "allRightsReserved": "© 2026 موصل. جميع الحقوق محفوظة.",
     "metaTitle": "موصل — Find it. Book it. Drive it.",
-    "metaDescription": "أول منصة تجميع موثوقة لكراء السيارات في وجدة — شفافة، محلية، فورية."
+    "metaDescription": "أول منصة تجميع موثوقة لكراء السيارات في وجدة — شفافة، محلية، فورية.",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة السر",
+    "confirmDelete": "تأكيد الحذف؟",
+    "logout": "تسجيل الخروج"
   },
   "navigation": {
     "home": "الرئيسية",
@@ -43,6 +47,7 @@
     "dashboard": "لوحة التحكم",
     "admin": "الإدارة",
     "login": "تسجيل الدخول",
+    "loginSubtitle": "سجل الدخول لإدارة حجوزاتك",
     "logout": "تسجيل الخروج",
     "profile": "الملف الشخصي",
     "support": "الدعم",
@@ -154,7 +159,31 @@
     "deleteButton": "حذف",
     "deleteConfirm": "تأكيد الحذف؟",
     "deleteWarning": "ستصبح المركبة غير متاحة للحجز.",
-    "noVehiclesFleet": "لا توجد مركبات في أسطولك"
+    "noVehiclesFleet": "لا توجد مركبات في أسطولك",
+    "editTitle": "تعديل المركبة",
+    "hours": "ساعات العمل : 9ص - 9م (الاثنين-السبت)",
+    "category": "الفئة",
+    "citadine": "مدنية",
+    "berline": "سيدان",
+    "suv": "دفع رباعي",
+    "prestige": "فاخرة",
+    "backToResults": "العودة إلى النتائج",
+    "transparency": "الشفافية",
+    "minAge": "السن الأدنى",
+    "licenseRequired": "رخصة مطلوبة",
+    "minLicenseYear": "سنة واحدة على الأقل",
+    "ageValue": "21 سنة",
+    "partnerAgency": "وكالة شريكة",
+    "oujdaMorocco": "وجدة، المغرب",
+    "currency": "درهم",
+    "perDayShort": "{price} درهم/اليوم",
+    "ageRequirement": "السن الأدنى: 21 سنة. رخصة سياقة ب سارية المفعول لأكثر من سنة. الدفع نقداً في الوكالة.",
+    "paymentInfo": "لا يوجد دفع عبر الإنترنت. الدفع مباشرة في الوكالة.",
+    "modifySearch": "حاول تغيير تواريخك أو توسيع معايير البحث.",
+    "toDefine": "سيتم تحديده",
+    "duration": "المدة",
+    "day": "يوم",
+    "days": "أيام"
   },
   "reservation": {
     "title": "احجز هذه المركبة",
@@ -200,7 +229,14 @@
     "statusExpired": "منتهية الصلاحية",
     "statusActivated": "مفعلة",
     "statusCompleted": "منتهية",
-    "minAgeNotice": "السن الأدنى: 21 سنة. رخصة سياقة ب سارية المفعول لأكثر من سنة."
+    "minAgeNotice": "السن الأدنى: 21 سنة. رخصة سياقة ب سارية المفعول لأكثر من سنة.",
+    "requestDetail": "تفاصيل الطلب",
+    "remainingTime": "الوقت المتبقي للرد",
+    "pickupCode": "رمز الاستلام",
+    "startLabel": "البداية",
+    "endLabel": "النهاية",
+    "acceptBooking": "قبول الحجز",
+    "rejectBooking": "رفض الحجز"
   },
   "agencies": {
     "registerTitle": "تسجيل الوكالة الشريكة",
@@ -264,7 +300,9 @@
     "totalEarnings": "إجمالي الأرباح",
     "noPendingRequests": "لا توجد طلبات معلقة",
     "viewAllRequests": "عرض جميع الطلبات",
-    "activatedSuccess": "تم تفعيل الحجز بنجاح"
+    "activatedSuccess": "تم تفعيل الحجز بنجاح",
+    "closeBooking": "إغلاق",
+    "completedSuccess": "منتهية"
   },
   "admin": {
     "title": "الإدارة",

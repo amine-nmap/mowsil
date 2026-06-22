@@ -148,7 +148,7 @@ export default function AgencyDashboardClient({ data }: Props) {
                             </p>
                           </div>
                           <div className="flex items-center gap-3">
-                            {req.expires_at && <ExpiryTimer expiresAt={req.expires_at} />}
+                            {req.expires_at && <ExpiryTimer expiresAt={req.expires_at} expiredLabel={s("expired")} />}
                             <Badge variant="warning">{s("pending")}</Badge>
                             {isRtl ? <ArrowLeft size={16} className="text-mowsil-legend" /> : <ArrowRight size={16} className="text-mowsil-legend" />}
                           </div>

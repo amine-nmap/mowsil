@@ -53,7 +53,7 @@ export default function VehicleDetailClient({ vehicle }: Props) {
     { icon: Gauge, label: v("transmission"), value: vehicle.gearbox },
     { icon: Calendar, label: v("mileage"), value: vehicle.mileage_policy ?? v("unlimited") },
     { icon: Shield, label: v("deposit"), value: vehicle.deposit_amount ? `${vehicle.deposit_amount} DH` : v("depositNone") },
-    { icon: Car, label: "Catégorie", value: "Citadine" },
+    { icon: Car, label: v("category"), value: v("citadine") },
     { icon: Users, label: v("seats", { count: 5 }), value: "5" },
   ];
 
@@ -69,7 +69,7 @@ export default function VehicleDetailClient({ vehicle }: Props) {
             className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors mb-6"
           >
             {isRtl ? <ArrowRight size={16} /> : <ArrowLeft size={16} />}
-            Retour aux résultats
+            {v("backToResults")}
           </Link>
 
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
@@ -140,8 +140,7 @@ export default function VehicleDetailClient({ vehicle }: Props) {
                 <div className="mt-6">
                   <h3 className="font-bold text-mowsil-navy text-sm mb-2">{v("description")}</h3>
                   <p className="text-sm text-mowsil-body leading-relaxed">
-                    {vehicle.brand} {vehicle.model} récent(e) en parfait état, idéal(e) pour vos déplacements à Oujda.
-                    Climatisation, Bluetooth, faible consommation. Entretien régulier effectué.
+                    {vehicle.brand} {vehicle.model}
                   </p>
                 </div>
               </CardBody>
@@ -151,24 +150,24 @@ export default function VehicleDetailClient({ vehicle }: Props) {
             <Card>
               <CardBody className="p-5 space-y-4">
                 <h3 className="font-bold text-mowsil-navy flex items-center gap-2">
-                  <Info size={16} /> Transparence
+                  <Info size={16} /> {v("transparency")}
                 </h3>
                 <div className="grid gap-3 sm:grid-cols-2">
                   <div className="p-3 rounded-lg bg-mowsil-gray">
-                    <p className="text-xs text-mowsil-legend">Carburant</p>
-                    <p className="text-sm font-semibold text-mowsil-navy">{vehicle.fuel_policy ?? "Plein à plein"}</p>
+                    <p className="text-xs text-mowsil-legend">{v("fuel")}</p>
+                    <p className="text-sm font-semibold text-mowsil-navy">{vehicle.fuel_policy ?? v("fullToFull")}</p>
                   </div>
                   <div className="p-3 rounded-lg bg-mowsil-gray">
-                    <p className="text-xs text-mowsil-legend">Âge minimum</p>
-                    <p className="text-sm font-semibold text-mowsil-navy">21 ans</p>
+                    <p className="text-xs text-mowsil-legend">{v("minAge")}</p>
+                    <p className="text-sm font-semibold text-mowsil-navy">{v("ageValue")}</p>
                   </div>
                   <div className="p-3 rounded-lg bg-mowsil-gray">
-                    <p className="text-xs text-mowsil-legend">Permis requis</p>
-                    <p className="text-sm font-semibold text-mowsil-navy">1 an minimum</p>
+                    <p className="text-xs text-mowsil-legend">{v("licenseRequired")}</p>
+                    <p className="text-sm font-semibold text-mowsil-navy">{v("minLicenseYear")}</p>
                   </div>
                   <div className="p-3 rounded-lg bg-mowsil-gray">
-                    <p className="text-xs text-mowsil-legend">Kilométrage</p>
-                    <p className="text-sm font-semibold text-mowsil-navy">{vehicle.mileage_policy ?? "Illimité"}</p>
+                    <p className="text-xs text-mowsil-legend">{v("mileage")}</p>
+                    <p className="text-sm font-semibold text-mowsil-navy">{vehicle.mileage_policy ?? v("unlimited")}</p>
                   </div>
                 </div>
               </CardBody>
@@ -183,16 +182,16 @@ export default function VehicleDetailClient({ vehicle }: Props) {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
-                      <p className="font-bold text-mowsil-navy">{vehicle.agencies?.name ?? "Agence partenaire"}</p>
+                      <p className="font-bold text-mowsil-navy">{vehicle.agencies?.name ?? v("partnerAgency")}</p>
                       <Badge variant="success">{v("agencyVerified")}</Badge>
                     </div>
-                    <p className="text-xs text-mowsil-legend mt-1">{vehicle.agencies?.address ?? "Oujda, Maroc"}</p>
+                    <p className="text-xs text-mowsil-legend mt-1">{vehicle.agencies?.address ?? v("oujdaMorocco")}</p>
                     {vehicle.agencies?.phone && (
                       <p className="text-xs text-mowsil-legend mt-0.5">{vehicle.agencies.phone}</p>
                     )}
                     <div className="mt-3 flex items-center gap-2 text-xs text-mowsil-legend">
                       <Clock size={14} />
-                      <span>Horaires : 9h - 21h (lun-sam)</span>
+                      <span>{v("hours")}</span>
                     </div>
                   </div>
                 </div>
@@ -223,13 +222,13 @@ export default function VehicleDetailClient({ vehicle }: Props) {
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-mowsil-legend">Politique carburant</span>
-                      <span className="font-semibold text-mowsil-navy">{vehicle.fuel_policy ?? "Plein à plein"}</span>
+                      <span className="text-mowsil-legend">{v("fuelPolicy")}</span>
+                      <span className="font-semibold text-mowsil-navy">{vehicle.fuel_policy ?? v("fullToFull")}</span>
                     </div>
                   </div>
 
                   <Message variant="info" className="text-xs">
-                    <p>Âge minimum : 21 ans. Permis B valide depuis plus d&apos;un an. Paiement en espèces à l&apos;agence.</p>
+                    <p>{v("ageRequirement")}</p>
                   </Message>
 
                   <Link href={bookingUrl}>
@@ -245,7 +244,7 @@ export default function VehicleDetailClient({ vehicle }: Props) {
                   </Link>
 
                   <p className="text-xs text-center text-mowsil-legend">
-                    Aucun paiement en ligne. Vous réglez directement à l&apos;agence.
+                    {v("paymentInfo")}
                   </p>
                 </CardBody>
               </Card>

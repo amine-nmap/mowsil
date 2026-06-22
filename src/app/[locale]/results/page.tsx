@@ -1,5 +1,6 @@
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { mockVehicles, mockAgencies } from "@/data/mock";
+import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import ResultsClient from "@/components/vehicle/results-client";
 
@@ -16,9 +17,8 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return {
-    title: locale === "ar" ? "بحث السيارات في وجدة | موصل" : "Rechercher un véhicule à Oujda | MOWSIL",
-  };
+  const t = await getTranslations({ locale, namespace: "search" });
+  return { title: `${t("title")} | MOWSIL` };
 }
 
 export default async function ResultsPage({ searchParams }: Props) {

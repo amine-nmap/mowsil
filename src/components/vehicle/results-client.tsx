@@ -25,7 +25,7 @@ type Props = {
   filters: Record<string, string | undefined>;
 };
 
-const CATEGORIES = ["Citadine", "Berline", "SUV", "Prestige"];
+const CATEGORIES = ["citadine", "berline", "suv", "prestige"];
 
 export default function ResultsClient({ vehicles, filters }: Props) {
   const t = useTranslations("vehicles");
@@ -57,7 +57,7 @@ export default function ResultsClient({ vehicles, filters }: Props) {
                     if (v) sp.set(k, v);
                   });
                   if (isActive) sp.delete("category");
-                  else sp.set("category", cat.toLowerCase());
+                  else sp.set("category", cat);
                   router.push(`/${params.locale}/results?${sp.toString()}`);
                 }}
                 className={`px-3 py-1.5 text-xs font-semibold rounded-full border transition-colors ${
@@ -66,7 +66,7 @@ export default function ResultsClient({ vehicles, filters }: Props) {
                     : "bg-white text-mowsil-navy border-mowsil-card-border hover:border-mowsil-navy"
                 }`}
               >
-                {cat}
+                {t(cat)}
               </button>
             );
           })}
@@ -76,7 +76,7 @@ export default function ResultsClient({ vehicles, filters }: Props) {
           <div className="max-w-md mx-auto py-16">
             <Message variant="info">
               <p className="font-semibold">{t("noVehicles")}</p>
-              <p className="text-sm mt-1">Essayez de modifier vos dates ou d&apos;élargir vos critères de recherche.</p>
+              <p className="text-sm mt-1">{t("modifySearch")}</p>
             </Message>
           </div>
         ) : (

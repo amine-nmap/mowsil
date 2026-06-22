@@ -13,16 +13,17 @@ const initialState = { error: "" };
 export default function LoginForm() {
   const [state, formAction, pending] = useActionState(login, initialState);
   const t = useTranslations("common");
+  const n = useTranslations("navigation");
 
   return (
     <div className="min-h-screen bg-mowsil-gray flex items-center justify-center">
       <div className="mx-auto w-full max-w-sm px-4">
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-mowsil-navy">
-            Espace Agence
+            {n("login")}
           </h1>
           <p className="text-sm text-mowsil-legend mt-1">
-            Connectez-vous pour gérer vos réservations
+            {n("loginSubtitle")}
           </p>
         </div>
 
@@ -39,7 +40,7 @@ export default function LoginForm() {
           <Input
             id="email"
             name="email"
-            label="Email"
+            label={t("email")}
             type="email"
             placeholder="contact@agence.ma"
             required
@@ -47,7 +48,7 @@ export default function LoginForm() {
           <Input
             id="password"
             name="password"
-            label="Mot de passe"
+            label={t("password")}
             type="password"
             required
           />
@@ -59,7 +60,7 @@ export default function LoginForm() {
             disabled={pending}
           >
             <LogIn size={18} />
-            {pending ? "Connexion..." : "Se connecter"}
+            {pending ? t("loading") : n("login")}
           </Button>
         </form>
       </div>

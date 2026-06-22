@@ -241,9 +241,9 @@ export default function ReservationForm({
                   <Calendar size={20} className="text-mowsil-navy shrink-0 mt-0.5" />
                   <div>
                     <p className="text-sm font-semibold text-mowsil-navy">
-                      {defaultStartDate || "À définir"} - {defaultEndDate || "À définir"}
+                      {defaultStartDate || v("toDefine")} - {defaultEndDate || v("toDefine")}
                     </p>
-                    <p className="text-xs text-mowsil-legend">{days} jour{days > 1 ? "s" : ""}</p>
+                    <p className="text-xs text-mowsil-legend">{days} {days > 1 ? v("days") : v("day")}</p>
                   </div>
                 </div>
 
@@ -253,8 +253,8 @@ export default function ReservationForm({
                     <span className="font-semibold">{vehicle.daily_price} DH</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-mowsil-legend">Durée</span>
-                    <span className="font-semibold">{days} jour{days > 1 ? "s" : ""}</span>
+                    <span className="text-mowsil-legend">{v("duration")}</span>
+                    <span className="font-semibold">{days} {days > 1 ? v("days") : v("day")}</span>
                   </div>
                   <div className="flex justify-between text-lg font-bold border-t border-mowsil-card-border pt-2">
                     <span>{t("totalPrice")}</span>

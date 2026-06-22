@@ -55,6 +55,7 @@ export default function RequestDetailClient({ booking }: Props) {
   const router = useRouter();
   const t = useTranslations("reservation");
   const c = useTranslations("common");
+  const s = useTranslations("statuses");
   const v = useTranslations("vehicles");
 
   async function handleAccept() {
@@ -105,7 +106,7 @@ export default function RequestDetailClient({ booking }: Props) {
               <Clock size={20} className="text-amber-500" />
               <div>
                 <p className="text-sm font-semibold text-mowsil-navy">{t("remainingTime")}</p>
-                <ExpiryTimer expiresAt={booking.expires_at} />
+                <ExpiryTimer expiresAt={booking.expires_at} expiredLabel={s("expired")} />
               </div>
             </CardBody>
           </Card>

@@ -139,10 +139,10 @@ export function getVehiclesByAgency(agencyId: string) {
 export function getVehiclesByCategory(category: string) {
   return mockVehicles.filter((v) => {
     const catMap: Record<string, string[]> = {
-      Citadine: ["Sandero", "Clio", "208", "Kwid", "i10", "i20", "Polo"],
-      Berline: ["Logan", "301", "Megane", "Corolla"],
-      SUV: ["Duster", "Tucson", "2008", "Sportage", "Santa Fe"],
-      Prestige: ["Hilux", "Rifter"],
+      citadine: ["Sandero", "Clio", "208", "Kwid", "i10", "i20", "Polo"],
+      berline: ["Logan", "301", "Megane", "Corolla"],
+      suv: ["Duster", "Tucson", "2008", "Sportage", "Santa Fe"],
+      prestige: ["Hilux", "Rifter"],
     };
     const models = catMap[category] ?? [];
     return models.includes(v.model);

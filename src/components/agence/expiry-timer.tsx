@@ -5,9 +5,10 @@ import { Clock } from "lucide-react";
 
 type Props = {
   expiresAt: string;
+  expiredLabel?: string;
 };
 
-export default function ExpiryTimer({ expiresAt }: Props) {
+export default function ExpiryTimer({ expiresAt, expiredLabel = "Expirée" }: Props) {
   const [remaining, setRemaining] = useState("");
 
   useEffect(() => {
@@ -17,7 +18,7 @@ export default function ExpiryTimer({ expiresAt }: Props) {
       const diff = expiry.getTime() - now.getTime();
 
       if (diff <= 0) {
-        setRemaining("Expirée");
+        setRemaining("expired");
         return;
       }
 
@@ -36,10 +37,10 @@ export default function ExpiryTimer({ expiresAt }: Props) {
     return () => clearInterval(interval);
   }, [expiresAt]);
 
-  if (!remaining || remaining === "Expirée") {
+  if (!remaining || remaining === "expired") {
     return (
       <span className="text-xs text-mowsil-error flex items-center gap-1">
-        <Clock size={12} /> Expirée
+        <Clock size={12} /> {expiredLabel}
       </span>
     );
   }

@@ -80,7 +80,7 @@ export default function AgencyRequestsClient({ bookings }: Props) {
             <p className="text-sm text-mowsil-legend mt-1">
               {pendingCount > 0
                 ? `${pendingCount} demande${pendingCount > 1 ? "s" : ""} en attente`
-                : "Toutes les demandes"}
+                : d("noPendingRequests")}
             </p>
           </div>
         </div>
@@ -112,7 +112,7 @@ export default function AgencyRequestsClient({ bookings }: Props) {
                       </div>
                       <div className="flex items-center gap-3">
                         {booking.expires_at && booking.status === "en_attente" && (
-                          <ExpiryTimer expiresAt={booking.expires_at} />
+                          <ExpiryTimer expiresAt={booking.expires_at} expiredLabel={s("expired")} />
                         )}
                         <Badge variant={statusBadge[booking.status] ?? "outline"}>
                           {s(statusKey[booking.status] ?? booking.status)}
