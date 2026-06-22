@@ -2,6 +2,11 @@
 
 import { redirect } from "next/navigation";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { routing } from "@/i18n/routing";
+
+function localeRedirect(path: string) {
+  redirect(`/${routing.defaultLocale}${path}`);
+}
 
 export async function login(_prev: { error: string }, formData: FormData) {
   const email = formData.get("email") as string;
@@ -48,13 +53,13 @@ export async function login(_prev: { error: string }, formData: FormData) {
     return { error: "Votre compte a été suspendu. Contactez le support." };
   }
 
-  redirect("/fr/agence/dashboard");
+  redirect(`/${routing.defaultLocale}/agence/dashboard`);
 }
 
 export async function logout() {
   const supabase = await createServerSupabaseClient();
   await supabase.auth.signOut();
-  redirect("/fr/agence/login");
+  redirect(`/${routing.defaultLocale}/agence/login`);
 }
 
 export async function getAgencySession() {
@@ -84,7 +89,7 @@ export async function getAgencySession() {
 
 export async function requireAgency() {
   const session = await getAgencySession();
-  if (!session) redirect("/fr/agence/login");
+  if (!session) redirect(`/${routing.defaultLocale}/agence/login`);
   return session;
 }
 

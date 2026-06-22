@@ -100,10 +100,10 @@ export default function VehicleForm() {
   }, [data, params?.locale, router]);
 
   const steps = [
-    { key: "identity", icon: Car, title: "Marque & Modèle" },
-    { key: "pricing", icon: Settings, title: "Prix & Carburant" },
-    { key: "policy", icon: Gauge, title: "Politique" },
-    { key: "photos", icon: Camera, title: "Photos" },
+    { key: "identity", icon: Car, title: t("brand") + " & " + t("model") },
+    { key: "pricing", icon: Settings, title: t("dailyPrice") + " & " + t("fuel") },
+    { key: "policy", icon: Gauge, title: t("fuelPolicy") },
+    { key: "photos", icon: Camera, title: t("photos") },
   ];
 
   return (
@@ -141,7 +141,7 @@ export default function VehicleForm() {
                 <Input label={t("model")} placeholder={t("modelPlaceholder")} value={data.model} onChange={(e) => setData({ ...data, model: e.target.value })} required />
                 <Input label={t("year")} type="number" min={2000} max={new Date().getFullYear() + 1} value={data.year} onChange={(e) => setData({ ...data, year: parseInt(e.target.value) || 0 })} required />
                 <div className="space-y-1.5">
-                  <label className="block text-sm font-bold text-mowsil-navy">Catégorie</label>
+                  <label className="block text-sm font-bold text-mowsil-navy">{t("category")}</label>
                   <select value={data.category} onChange={(e) => setData({ ...data, category: e.target.value })} className="w-full rounded-lg border border-mowsil-card-border px-3.5 py-2.5 text-sm text-mowsil-navy bg-white focus:outline-none focus:ring-2 focus:ring-mowsil-green/30 focus:border-mowsil-green">
                     {CATEGORIES.map((cat) => <option key={cat} value={cat}>{cat}</option>)}
                   </select>
@@ -152,28 +152,28 @@ export default function VehicleForm() {
             {step === 1 && (
               <div className="space-y-4">
                 <div className="space-y-1.5">
-                  <label className="block text-sm font-bold text-mowsil-navy">Carburant</label>
+                  <label className="block text-sm font-bold text-mowsil-navy">{t("fuel")}</label>
                   <select value={data.fuelType} onChange={(e) => setData({ ...data, fuelType: e.target.value })} className="w-full rounded-lg border border-mowsil-card-border px-3.5 py-2.5 text-sm text-mowsil-navy bg-white focus:outline-none focus:ring-2 focus:ring-mowsil-green/30 focus:border-mowsil-green">
                     <option value="Essence">Essence</option>
                     <option value="Diesel">Diesel</option>
                   </select>
                 </div>
                 <div className="space-y-1.5">
-                  <label className="block text-sm font-bold text-mowsil-navy">Transmission</label>
+                  <label className="block text-sm font-bold text-mowsil-navy">{t("transmission")}</label>
                   <select value={data.gearbox} onChange={(e) => setData({ ...data, gearbox: e.target.value })} className="w-full rounded-lg border border-mowsil-card-border px-3.5 py-2.5 text-sm text-mowsil-navy bg-white focus:outline-none focus:ring-2 focus:ring-mowsil-green/30 focus:border-mowsil-green">
                     <option value="Manuelle">Manuelle</option>
                     <option value="Automatique">Automatique</option>
                   </select>
                 </div>
                 <Input label={t("dailyPrice")} type="number" min={1} placeholder={t("dailyPricePlaceholder")} value={data.dailyPrice || ""} onChange={(e) => setData({ ...data, dailyPrice: parseInt(e.target.value) || 0 })} required />
-                <Input label="Caution (DH, optionnel)" type="number" min={0} placeholder="3000" value={data.depositAmount} onChange={(e) => setData({ ...data, depositAmount: e.target.value })} />
+                <Input label={t("deposit") + " (DH, " + c("optional") + ")"} type="number" min={0} placeholder="3000" value={data.depositAmount} onChange={(e) => setData({ ...data, depositAmount: e.target.value })} />
               </div>
             )}
 
             {step === 2 && (
               <div className="space-y-4">
                 <div className="space-y-1.5">
-                  <label className="block text-sm font-bold text-mowsil-navy">Kilométrage</label>
+                  <label className="block text-sm font-bold text-mowsil-navy">{t("mileage")}</label>
                   <select value={data.mileagePolicy} onChange={(e) => setData({ ...data, mileagePolicy: e.target.value })} className="w-full rounded-lg border border-mowsil-card-border px-3.5 py-2.5 text-sm text-mowsil-navy bg-white focus:outline-none focus:ring-2 focus:ring-mowsil-green/30 focus:border-mowsil-green">
                     <option value="Illimité">Illimité</option>
                     <option value="200 km/jour inclus">200 km/jour inclus</option>
@@ -182,7 +182,7 @@ export default function VehicleForm() {
                   </select>
                 </div>
                 <div className="space-y-1.5">
-                  <label className="block text-sm font-bold text-mowsil-navy">Politique carburant</label>
+                  <label className="block text-sm font-bold text-mowsil-navy">{t("fuelPolicy")}</label>
                   <select value={data.fuelPolicy} onChange={(e) => setData({ ...data, fuelPolicy: e.target.value })} className="w-full rounded-lg border border-mowsil-card-border px-3.5 py-2.5 text-sm text-mowsil-navy bg-white focus:outline-none focus:ring-2 focus:ring-mowsil-green/30 focus:border-mowsil-green">
                     <option value="Plein à plein">Plein à plein</option>
                     <option value="Remise identique">Remise identique</option>

@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { Upload, X, Image } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type Props = {
   value: File | File[] | null;
@@ -14,6 +15,7 @@ const MAX_SIZE = 5 * 1024 * 1024;
 const ACCEPTED = ["image/jpeg", "image/png", "image/webp"];
 
 export default function PhotoUploader({ value, onChange, error, multiple }: Props) {
+  const t = useTranslations("vehicles");
   const inputRef = useRef<HTMLInputElement>(null);
   const [previews, setPreviews] = useState<string[]>(() => {
     if (!value) return [];
@@ -95,7 +97,7 @@ export default function PhotoUploader({ value, onChange, error, multiple }: Prop
         >
           <Upload size={24} className="mx-auto text-mowsil-legend mb-2" />
           <p className="text-xs text-mowsil-legend">
-            {multiple ? "Cliquez pour ajouter des photos (JPG/PNG/WebP, max 5 Mo)" : "Cliquez pour ajouter une photo (JPG/PNG/WebP, max 5 Mo)"}
+            {multiple ? t("photosUpload") : t("photosMin")}
           </p>
         </button>
       )}
